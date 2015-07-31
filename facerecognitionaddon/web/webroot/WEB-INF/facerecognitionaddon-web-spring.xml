@@ -43,7 +43,7 @@
     
 	<!--  Configure the class to use for jalo session creation -->
 	<!-- <bean id="jalosession"   class="de.hybris.platform.jalo.JaloSessionFactory">
-		<property name="targetClassName" value="com.accenture.jalo.FacerecognitionaddonJaloSession"/>
+		<property name="targetClassName" value="com.acc.jalo.FacerecognitionaddonJaloSession"/>
 	</bean>-->
 
 	<!-- Spring managed FilterChain for hybris Filter stack -->
@@ -66,7 +66,6 @@
       <!-- <property name="secureMediaToken" value="securemedias"/>  securemedias is default but you may overwrite it -->
        <aop:scoped-proxy/>
      </bean>	
-
 
 	<!-- 
 	 WARNING: 

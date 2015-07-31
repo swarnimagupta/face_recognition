@@ -17,25 +17,13 @@
 
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="beans.xsd">
 
-	<bean class="de.hybris.platform.commercefacades.user.data.CustomerData"
-		extends="de.hybris.platform.commercefacades.user.data.PrincipalData">
-			<property name="age" type="java.lang.Integer"/>
-			<property name="complexion" type="java.lang.String"/>
+	<!--
+		Example Data POJO
+	
+	<bean class="yemptypackage.data.MyPojo">
+		<property name="id" type="String"/>
+		<property name="flag" type="boolean"/>
 	</bean>
-	
-	<bean class="com.acc.data.ImageQualityData">
-		<property name="imagePath " type=" java.lang.String "/>
-		<property name="qualityScore" type=" java.lang.String "/>
-		<property name="identificationIds" type="java.util.List&lt;java.lang.String>"/>
-	</bean>
-	
-<!-- 	<enum class="com.acc.data.Complexion"> -->
-<!-- 		<value>VeryFair</value> -->
-<!-- 		<value>Fair</value> -->
-<!-- 		<value>Wheatish</value> -->
-<!-- 		<value>DarkBrown</value> -->
-<!-- 		<value>Black</value> -->
-<!-- 	</enum> -->
-	
+	-->
 
 </beans>

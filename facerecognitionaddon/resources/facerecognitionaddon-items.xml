@@ -18,81 +18,12 @@
 
 <items 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 			xsi:noNamespaceSchemaLocation="items.xsd">
-			
-			<collectiontypes>
-				<collectiontype elementtype="java.lang.string" code="Identifiercodes"
-			 autocreate="true" generate="true" type="list"/>
-			</collectiontypes>
-			<enumtypes>
-		<!--<enumtype code="Gender" autocreate="true" generate="true">
-				<value code="Female"></value>
-				<value code="Male"></value>
-			</enumtype  -->
-			
-			<enumtype code="Complexion" autocreate="true" generate="true">
-				<value code="VeryFair"></value>
-				<value code="Fair"></value>
-				<value code="Wheatish"></value>
-				<value code="DarkBrown"></value>
-				<value code="Black"></value>
-			</enumtype>
-		</enumtypes>
-		
-		<relations>
-			<relation code="Customer2ImageQualityRel"
-				 		autocreate="true" generate="true" localized="false">
-				 <description>This is the link between customer and image</description>
-				<!-- <deployment table="Customer2IdentifierCodesRelation" typecode="31009"/> --> 
-				 <sourceElement type="Customer" qualifier="customer" cardinality="one"></sourceElement>
-				 <targetElement type="ImageQuality" qualifier="imageQuality" cardinality="many"></targetElement>
-			 </relation>
-		</relations>
-		
-		<itemtypes>
-			<itemtype code="Customer" autocreate="false" generate="false">
-			<attributes>
-				<attribute type="java.lang.integer" qualifier="age">
-					<modifiers read="true" write="true" search="true"
-						 optional="true"/>
-					<persistence type="property"/>
-				</attribute>
-			
-			<!--	<attribute type="Gender" qualifier="gender">
-					<modifiers read="true" write="true" search="true"
-						 optional="true"/>
-			   		 <persistence type="property"></persistence>>
-				</attribute>-->
-			
-				<attribute type="Complexion" qualifier="complexion">
-					<modifiers read="true" write="true" search="true"
-						 optional="true"/>
-					<persistence type="property"></persistence>
-				</attribute>	
-			</attributes>
-		</itemtype>
-		
-		<itemtype code="ImageQuality" autocreate="true" generate="true">
-			<deployment table="ImageQuality" typecode="11012"/>
-				<attributes>
-					<attribute type="java.lang.string" qualifier="qualityscore">
-						<description>quality of the photo uploaded</description>
-							<modifiers read="true" write="true" search="true"
-								 optional="true"/>
-							<persistence type="property"></persistence>
-					</attribute>
-					<attribute type="java.lang.Integer" qualifier="IdentityId">
-						<description>BiometricId</description>
-								<modifiers read="true" write="true" search="true" 
-							optional="true"/>
-						<persistence type="property"></persistence>
-					</attribute>
-					<attribute type="java.lang.string" qualifier="ImagePath">
-						<description>Customer's Image</description>
-							<modifiers read="true" write="true" search="true" 
-									optional="true"/>
-							<persistence type="property"></persistence>
-					</attribute>
-			</attributes>
-		</itemtype>
-		</itemtypes>		
+
+	<itemtypes>
+	
+
+
+</itemtypes>
+
 </items>
+

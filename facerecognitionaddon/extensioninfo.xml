@@ -18,12 +18,18 @@
 		<!-- you should add all required extensions to this list, except platform extensions which are automatically required -->         
 		<!-- <requires-extension name="cms"/> -->
 		<requires-extension name="hmc"/>
+		<requires-extension name="cms2"/>
+		<requires-extension name="acceleratorservices"/>
+		<requires-extension name="commercefacades"/>
+		<requires-extension name="wishlist"/>
+		<requires-extension name="addonsupport"/>
+		<requires-extension name="acceleratorstorefrontcommons" />
 
-		<coremodule generated="true" manager="com.accenture.jalo.FacerecognitionaddonManager" packageroot="com.accenture"/>
+		<coremodule generated="true" manager="com.acc.jalo.FacerecognitionaddonManager" packageroot="com.acc"/>
 
 		<webmodule jspcompile="false" webroot="/facerecognitionaddon"/>
 
-		<hmcmodule extensionclassname="com.accenture.hmc.FacerecognitionaddonHMCExtension"/>
+		<hmcmodule extensionclassname="com.acc.hmc.FacerecognitionaddonHMCExtension"/>
 					
 		
 

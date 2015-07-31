@@ -22,7 +22,7 @@
 <!--
 	<explorertree>
 		<group name="facerecognitionaddongroup">
-			<externalnode classname="com.accenture.hmc.FacerecognitionaddonTreeLeafChip"/>		
+			<externalnode classname="com.acc.hmc.FacerecognitionaddonTreeLeafChip"/>		
 		</group>
 	</explorertree>
 -->
