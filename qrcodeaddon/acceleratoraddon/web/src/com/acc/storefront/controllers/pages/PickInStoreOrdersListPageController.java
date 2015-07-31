@@ -54,7 +54,7 @@ import com.acc.facades.storecustomer.StoreCustomerFacade;
 import com.acc.facades.wishlist.data.Wishlist2Data;
 import com.acc.storefront.controllers.ControllerConstants;
 import com.acc.storefront.util.StoreCustomerData;
-import com.accenture.model.CSRCustomerDetailsModel;
+import com.acc.model.CSRCustomerDetailsModel;
 
 
 /**

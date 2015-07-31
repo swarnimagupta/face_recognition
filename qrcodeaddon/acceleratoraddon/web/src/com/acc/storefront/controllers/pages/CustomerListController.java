@@ -5,9 +5,6 @@ package com.acc.storefront.controllers.pages;
 
 import de.hybris.platform.addonsupport.controllers.page.AbstractAddOnPageController;
 
-
-
-
 import de.hybris.platform.basecommerce.model.site.BaseSiteModel;
 import de.hybris.platform.catalog.enums.ProductReferenceTypeEnum;
 import de.hybris.platform.catalog.model.ProductReferenceModel;
@@ -54,10 +51,6 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
-
-
-
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
@@ -87,9 +80,9 @@ import com.acc.storefront.util.ProfileInformationDto;
 import com.acc.storefront.util.StoreCustomerData;
 import com.acc.util.WeatherUtil;
 import com.acc.util.WebservicesUtil;
-import com.accenture.enums.CSRStoreStatus;
-import com.accenture.model.CSRCustomerDetailsModel;
-import com.accenture.model.ConfigModel;
+import com.acc.enums.CSRStoreStatus;
+import com.acc.model.CSRCustomerDetailsModel;
+import com.acc.model.ConfigModel;
 
 import java.net.HttpURLConnection;
 

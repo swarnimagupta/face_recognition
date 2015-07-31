@@ -25,5 +25,62 @@
 		<property name="flag" type="boolean"/>
 	</bean>
 	-->
+	<bean class="com.acc.facades.CSRCustomerDetails.data.CSRCustomerDetailsData">
+		<property name="pk" type="String"/>
+		<property name="customerName" type="String"/>
+		<property name="customerId" type="String"/>
+		<property name="status" type="com.acc.enums.CSRStoreStatus"/>
+		<property name="loginTime" type="java.util.Date"/>
+		<property name="UUID" type="String"/>
+		<property name="processedBy" type="String"/>
+		<property name="pointOfService" type="String"/>
+		<property name="profilePictureURL" type="String"/>		
+	</bean> 
 
+	<bean class="com.acc.facades.wishlist.data.WishlistData">
+		<property name="code" type="String"/>
+		<property name="name" type="String"/>
+	</bean>
+	
+	<bean class="com.acc.facades.collectOrder.data.CollectOrderData">
+		<property name="pk" type="String"/>
+		<property name="ucoid" type="String"/>
+		<property name="orderId" type="String"/>
+		<property name="customerId" type="String"/>
+		<property name="pId" type="String"/>
+		<property name="status" type="com.acc.facades.collectOrder.CollectOrderStatus"/>
+		<property name="createdTS" type="java.util.Date"/>
+	</bean>
+	
+	<enum class="com.acc.facades.collectOrder.CollectOrderStatus">
+		<value>PENDING</value>
+		<value>COMPLETED</value>
+		<value>COLLECTED</value>
+	</enum>
+	
+	<enum class="de.hybris.platform.commercefacades.product.ProductOption">
+		<value>IMAGES</value>
+		<value>URL</value>
+	</enum>
+	<!--Start: Wishlist2EntryData -->
+
+	<bean class="com.acc.facades.wishlist.data.Wishlist2EntryData">
+		<property name="product"
+		type="de.hybris.platform.commercefacades.product.data.ProductData" />
+		<property name="addedDate" type="java.util.Date" />
+	</bean>
+	<!-- End:Wishlist2EntryData -->
+	<!--Start: Wishlist2Data -->
+	<bean class="com.acc.facades.wishlist.data.Wishlist2Data">
+		<property name="name" type="String" />
+		<property name="description" type="String" />
+		<property name="entries"
+		type="java.util.List&lt;com.acc.facades.wishlist.data.Wishlist2EntryData>" />
+	</bean>
+	<!--End: Wishlist2Data -->
+	
+	<bean class="de.hybris.platform.commercefacades.order.data.OrderData"
+	      extends="de.hybris.platform.commercefacades.order.data.AbstractOrderData">
+		<property name="ucoid" type="String"/>
+	</bean>
 </beans>

@@ -16,9 +16,11 @@
    <extension abstractclassprefix="Generated" classprefix="Qrcode" managername="QrcodeManager" managersuperclass="de.hybris.platform.jalo.extension.Extension" name="qrcode">
                
       <!-- you should add all required extensions to this list, except platform extensions which are automatically required -->         
-      <!-- <requires-extension name="cms"/> -->         
+      <requires-extension name="cms2"/>      
+      <requires-extension name="commercefacades"/>
+	  <requires-extension name="wishlist"/>  
       
-	  <requires-extension name="cms2"/>
+
       <coremodule generated="true" manager="com.acc.jalo.QrcodeManager" packageroot="com.acc"/>
 
       <webmodule jspcompile="false" webroot="/qrcode"/>
