@@ -1,4 +1,4 @@
-package com.acc;
+package com.acc.storefront.controllers;
 
 /**
  * @author swapnil.a.pandey
@@ -20,7 +20,7 @@ public interface FcControllerConstants
 		{
 			interface Account
 			{
-				String FaceRecognitionPage = "pages/addon:/facerecognitionaddon/pages/faceRecognition";
+				String FaceRecognitionPage = "pages/addon:/facerecognitionaddon/pages/account/faceRecognitionPage";
 			}
 
 		}

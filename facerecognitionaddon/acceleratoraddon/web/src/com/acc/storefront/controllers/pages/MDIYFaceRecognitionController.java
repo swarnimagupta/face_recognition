@@ -1,6 +1,5 @@
 package com.acc.storefront.controllers.pages;
 
-import com.acc.FcControllerConstants;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.addonsupport.controllers.page.AbstractAddOnPageController;
 import org.springframework.context.annotation.Scope;
@@ -9,7 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-
+import com.acc.storefront.controllers.FcControllerConstants;
 
 /**
  * 
