@@ -20,7 +20,11 @@
 			xsi:noNamespaceSchemaLocation="items.xsd">
 
 	<itemtypes>
-	
+	<itemtype code="FaceRecognitionComponent" autocreate="true"
+			generate="true" extends="SimpleCMSComponent"
+			jaloclass="de.hybris.platform.cms2lib.components.FaceRecognitionComponent">
+			
+		</itemtype>
 
 
 </itemtypes>
