@@ -11,11 +11,12 @@
  * 
  *  
  */
-package com.accenture.controllers;
+package com.acc.storefront.controllers;
 
 /**
  */
 public interface FacerecognitionaddonControllerConstants
 {
-	// implement here controller constants used by this extension
+
+	
 }
