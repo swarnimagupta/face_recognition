@@ -11,7 +11,7 @@
  * 
  *  
  */
-package com.acc.constants;
+package com.accenture.constants;
 
 /**
  * Global class for all Facerecognitionaddon web constants. You can add global constants for your extension into this class.

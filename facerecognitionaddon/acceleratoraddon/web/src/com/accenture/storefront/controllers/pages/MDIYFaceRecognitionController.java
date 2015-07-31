@@ -1,6 +1,6 @@
-package com.acc.storefront.controllers.pages;
+package com.accenture.storefront.controllers.pages;
 
-import com.acc.FcControllerConstants;
+import com.accenture.FcControllerConstants;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.addonsupport.controllers.page.AbstractAddOnPageController;
 import org.springframework.context.annotation.Scope;

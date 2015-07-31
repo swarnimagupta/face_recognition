@@ -11,7 +11,7 @@
  * 
  *  
  */
-package com.acc.storefront.controllers;
+package com.accenture.storefront.controllers;
 
 /**
  */
