@@ -81,7 +81,46 @@
 	      	            !execution(* getPK(..))" />  	            
 	       <aop:pointcut id="profiledMethods" expression="execution(* *(..))" />	
 	  -->
+	<bean id="mdiySaveCustomerDataFacade" class="com.acc.facade.impl.MDIYSaveCustomerDataFacadeImpl">
+		<property name="mdiySaveCustomerDataService" ref=" mdiySaveCustomerDataService"/>
+		<property name="modelService" ref="modelService"/>
+	</bean>	
+
+	<!-- <bean id="profileHelper" class="ProfileHelper_path" > 
+	</bean> -->
+	     
+	<bean id="imageQualityPopulator" class="com.acc.populator.ImageQualityPopulator">
+	</bean>
+	<bean id="imageQualityData" class="com.acc.data.ImageQualityData" scope="prototype"/>
+
+	<bean id="imageQualityConverter" parent="abstractPopulatingConverter">
+		<lookup-method name="createTarget" bean="imageQualityData "/>
+		<property name="populators">
+			<list>
+				<ref bean="imageQualityPopulator"/>
+			</list>
+		</property>
+	</bean>
 	
-			
+	<bean id="customerData" class="com.acc.data.CustomerData" scope="prototype"/>
+
+	<bean id="customerDataConverter" parent="abstractPopulatingConverter">
+		<lookup-method name="createTarget" bean="customerData"/>
+		<property name="populators">
+			<list>
+				<ref bean="customerPopulator"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="mdiySaveCustomerDataService" class="com.acc.service.impl.MDIYSaveCustomerDataServiceImpl">
+		<property name="modelService" ref="modelService"/>
+	</bean>
+	
+	
+	<bean id="mdiYSubmitUserFacade" class="com.acc.facade.impl.MDIYSubmitUserFacadeImpl">
+		<property name=" mdiYSubmitUserService" ref="mdiYSubmitUserService"/>
+	</bean>
+		
 			
 </beans>
