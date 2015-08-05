@@ -10,8 +10,6 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.acc.data.ImageData;
 import com.acc.facade.MDIYCustomerInformationFacade;
 import com.acc.model.ImageQualityModel;
@@ -25,7 +23,6 @@ import com.acc.service.MDIYCustomerInformationService;
 public class MDIYCustomerInformationFacadeImpl implements MDIYCustomerInformationFacade
 {
 
-	@Autowired
 	private MDIYCustomerInformationService mDIYCustomerInformationService;
 
 	@Resource(name = "mdiYImagesToStringConverter")
@@ -33,7 +30,7 @@ public class MDIYCustomerInformationFacadeImpl implements MDIYCustomerInformatio
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.acc.facade.MDIYCustomerInformation#getCustomerImages(java.lang.String, com.acc.data.ImageData)
 	 */
 	@Override
@@ -48,4 +45,12 @@ public class MDIYCustomerInformationFacadeImpl implements MDIYCustomerInformatio
 		imageData.setImagesList(images);
 	}
 
+	/**
+	 * @param mDIYCustomerInformationService
+	 *           the mDIYCustomerInformationService to set
+	 */
+	public void setmDIYCustomerInformationService(final MDIYCustomerInformationService mDIYCustomerInformationService)
+	{
+		this.mDIYCustomerInformationService = mDIYCustomerInformationService;
+	}
 }

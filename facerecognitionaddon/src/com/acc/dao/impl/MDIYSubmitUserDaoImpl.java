@@ -9,7 +9,6 @@ import de.hybris.platform.servicelayer.search.FlexibleSearchService;
 import de.hybris.platform.servicelayer.search.SearchResult;
 
 import org.apache.commons.collections.CollectionUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import com.acc.dao.MDIYSubmitUserDao;
 
@@ -21,7 +20,6 @@ import com.acc.dao.MDIYSubmitUserDao;
 public class MDIYSubmitUserDaoImpl implements MDIYSubmitUserDao
 {
 
-	@Autowired
 	private FlexibleSearchService flexibleSearchService;
 
 	/*
@@ -38,5 +36,16 @@ public class MDIYSubmitUserDaoImpl implements MDIYSubmitUserDao
 		final SearchResult<CustomerModel> result = flexibleSearchService.search(flexibleQuery);
 		return CollectionUtils.isNotEmpty(result.getResult()) ? result.getResult().get(0) : null;
 	}
+
+	/**
+	 * @param flexibleSearchService
+	 *           the flexibleSearchService to set
+	 */
+	public void setFlexibleSearchService(final FlexibleSearchService flexibleSearchService)
+	{
+		this.flexibleSearchService = flexibleSearchService;
+	}
+
+
 
 }

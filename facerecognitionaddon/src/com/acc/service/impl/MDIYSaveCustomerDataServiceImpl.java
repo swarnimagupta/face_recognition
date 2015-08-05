@@ -6,7 +6,6 @@ import de.hybris.platform.servicelayer.model.ModelService;
 import java.util.Collection;
 
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import com.acc.model.ImageQualityModel;
 import com.acc.service.MDIYSaveCustomerDataService;
@@ -16,7 +15,7 @@ public class MDIYSaveCustomerDataServiceImpl implements MDIYSaveCustomerDataServ
 {
 	@SuppressWarnings("unused")
 	private static final Logger LOG = Logger.getLogger(MDIYSaveCustomerDataServiceImpl.class);
-	@Autowired
+
 	private ModelService modelService;
 
 	@Override
@@ -30,4 +29,12 @@ public class MDIYSaveCustomerDataServiceImpl implements MDIYSaveCustomerDataServ
 		return;
 	}
 
+	/**
+	 * @param modelService
+	 *           the modelService to set
+	 */
+	public void setModelService(final ModelService modelService)
+	{
+		this.modelService = modelService;
+	}
 }

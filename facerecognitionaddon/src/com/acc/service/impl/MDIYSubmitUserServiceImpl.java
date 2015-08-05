@@ -6,8 +6,6 @@ package com.acc.service.impl;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.model.ModelService;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.acc.dao.MDIYSubmitUserDao;
 import com.acc.model.CSRCustomerDetailsModel;
 import com.acc.service.MDIYSubmitUserService;
@@ -20,10 +18,8 @@ import com.acc.service.MDIYSubmitUserService;
 public class MDIYSubmitUserServiceImpl implements MDIYSubmitUserService
 {
 
-	@Autowired
 	private MDIYSubmitUserDao mdiYSubmitUserDao;
 
-	@Autowired
 	private ModelService modelService;
 
 	/*
@@ -47,6 +43,24 @@ public class MDIYSubmitUserServiceImpl implements MDIYSubmitUserService
 	public void addUserToQueue(final CSRCustomerDetailsModel model)
 	{
 		modelService.save(model);
+	}
+
+	/**
+	 * @param mdiYSubmitUserDao
+	 *           the mdiYSubmitUserDao to set
+	 */
+	public void setMdiYSubmitUserDao(final MDIYSubmitUserDao mdiYSubmitUserDao)
+	{
+		this.mdiYSubmitUserDao = mdiYSubmitUserDao;
+	}
+
+	/**
+	 * @param modelService
+	 *           the modelService to set
+	 */
+	public void setModelService(final ModelService modelService)
+	{
+		this.modelService = modelService;
 	}
 
 }

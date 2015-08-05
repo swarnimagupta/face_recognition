@@ -13,7 +13,6 @@ import java.awt.image.BufferedImage;
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import com.acc.data.ImageQualityData;
 import com.acc.facade.MDIYSaveCustomerDataFacade;
@@ -32,16 +31,14 @@ public class MDIYSaveCustomerDataFacadeImpl implements MDIYSaveCustomerDataFacad
 
 	private static final Logger LOG = Logger.getLogger(MDIYSaveCustomerDataFacadeImpl.class);
 
-	@Autowired
 	private UserService userService;
 
 	@Resource(name = "imageQualityConverter")
 	private Converter<ImageQualityModel, ImageQualityData> imageQualityConverter;
 
-	@Resource(name = "CustomerDataConverter")
-	private Converter<CustomerModel, CustomerData> CustomerDataConverter;
+	@Resource(name = "customerDataConverter")
+	private Converter<CustomerModel, CustomerData> customerDataConverter;
 
-	@Autowired
 	private MDIYSaveCustomerDataService mdiySaveCustomerDataService;
 
 
@@ -53,7 +50,7 @@ public class MDIYSaveCustomerDataFacadeImpl implements MDIYSaveCustomerDataFacad
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see com.acc.core.facade.MDIYSaveCustomerDataFacade#saveCustomerImage(java.awt.image.BufferedImage)
 	 */
 	@Override
@@ -65,38 +62,36 @@ public class MDIYSaveCustomerDataFacadeImpl implements MDIYSaveCustomerDataFacad
 	}
 
 	/**
-	 * @return the imageQualityConverter
+	 * @return the userService
 	 */
-	public Converter<ImageQualityModel, ImageQualityData> getImageQualityConverter()
+	public UserService getUserService()
 	{
-		return imageQualityConverter;
+		return userService;
 	}
 
 	/**
-	 * @param imageQualityConverter
-	 *           the imageQualityConverter to set
+	 * @param userService
+	 *           the userService to set
 	 */
-	public void setImageQualityConverter(final Converter<ImageQualityModel, ImageQualityData> imageQualityConverter)
+	public void setUserService(final UserService userService)
 	{
-		this.imageQualityConverter = imageQualityConverter;
-	}
-
-
-	/**
-	 * @return the saveCustomerDataConverter
-	 */
-	public Converter<CustomerModel, CustomerData> getSaveCustomerDataConverter()
-	{
-		return CustomerDataConverter;
+		this.userService = userService;
 	}
 
 	/**
-	 * @param saveCustomerDataConverter
-	 *           the saveCustomerDataConverter to set
+	 * @return the mdiySaveCustomerDataService
 	 */
-	@SuppressWarnings("javadoc")
-	public void setCustomerDataConverter(final Converter<CustomerModel, CustomerData> CustomerDataConverter)
+	public MDIYSaveCustomerDataService getMdiySaveCustomerDataService()
 	{
-		this.CustomerDataConverter = CustomerDataConverter;
+		return mdiySaveCustomerDataService;
+	}
+
+	/**
+	 * @param mdiySaveCustomerDataService
+	 *           the mdiySaveCustomerDataService to set
+	 */
+	public void setMdiySaveCustomerDataService(final MDIYSaveCustomerDataService mdiySaveCustomerDataService)
+	{
+		this.mdiySaveCustomerDataService = mdiySaveCustomerDataService;
 	}
 }

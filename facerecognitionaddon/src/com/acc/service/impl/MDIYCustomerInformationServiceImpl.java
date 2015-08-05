@@ -5,8 +5,6 @@ package com.acc.service.impl;
 
 import java.util.Collection;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.acc.dao.MDIYCustomerInformationDao;
 import com.acc.model.ImageQualityModel;
 import com.acc.service.MDIYCustomerInformationService;
@@ -18,7 +16,6 @@ import com.acc.service.MDIYCustomerInformationService;
  */
 public class MDIYCustomerInformationServiceImpl implements MDIYCustomerInformationService
 {
-	@Autowired
 	private MDIYCustomerInformationDao mDIYCustomerInformationDao;
 
 	/*
@@ -32,4 +29,12 @@ public class MDIYCustomerInformationServiceImpl implements MDIYCustomerInformati
 		return mDIYCustomerInformationDao.getCustomerImages(customerId);
 	}
 
+	/**
+	 * @param mDIYCustomerInformationDao
+	 *           the mDIYCustomerInformationDao to set
+	 */
+	public void setmDIYCustomerInformationDao(final MDIYCustomerInformationDao mDIYCustomerInformationDao)
+	{
+		this.mDIYCustomerInformationDao = mDIYCustomerInformationDao;
+	}
 }

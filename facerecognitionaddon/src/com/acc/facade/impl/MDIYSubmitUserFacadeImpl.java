@@ -10,7 +10,6 @@ import de.hybris.platform.servicelayer.model.ModelService;
 import javax.annotation.Resource;
 
 import org.apache.commons.lang.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import com.acc.data.ImageQualityData;
 import com.acc.data.StatusData;
@@ -27,7 +26,6 @@ import com.acc.service.MDIYSubmitUserService;
 public class MDIYSubmitUserFacadeImpl implements MDIYSubmitUserFacade
 {
 
-	@Autowired
 	private MDIYSubmitUserService mdiYSubmitUserService;
 
 	@Resource(name = "mdiYImageConverter")
@@ -39,12 +37,11 @@ public class MDIYSubmitUserFacadeImpl implements MDIYSubmitUserFacade
 	@Resource(name = "mdiYCustomerToCSRCustomerConverter")
 	private Converter<CustomerModel, CSRCustomerDetailsModel> mdiYCustomerToCSRCustomerConverter;
 
-	@Autowired
 	private ModelService modelService;
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.acc.facade.MDIYSubmitUserFacade#addUserToQueue()
 	 */
 	@Override
@@ -75,5 +72,24 @@ public class MDIYSubmitUserFacadeImpl implements MDIYSubmitUserFacade
 		}
 		return statusData;
 	}
+
+	/**
+	 * @param mdiYSubmitUserService
+	 *           the mdiYSubmitUserService to set
+	 */
+	public void setMdiYSubmitUserService(final MDIYSubmitUserService mdiYSubmitUserService)
+	{
+		this.mdiYSubmitUserService = mdiYSubmitUserService;
+	}
+
+	/**
+	 * @param modelService
+	 *           the modelService to set
+	 */
+	public void setModelService(final ModelService modelService)
+	{
+		this.modelService = modelService;
+	}
+
 
 }
