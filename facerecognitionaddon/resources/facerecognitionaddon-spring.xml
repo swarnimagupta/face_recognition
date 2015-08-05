@@ -83,7 +83,6 @@
 	  -->
 	<bean id="mdiySaveCustomerDataFacade" class="com.acc.facade.impl.MDIYSaveCustomerDataFacadeImpl">
 		<property name="mdiySaveCustomerDataService" ref="mdiySaveCustomerDataService"/>
-		<property name="modelService" ref="modelService"/>
 	</bean>	
 
 	<!-- <bean id="profileHelper" class="ProfileHelper_path" > 
@@ -170,6 +169,17 @@
 	
 	<bean id="mDIYCustomerInformationDao" class="com.acc.dao.impl.MDIYCustomerInformationDaoImpl">
 		<constructor-arg value="ImageQuality"/>
+	</bean>
+	
+	<bean id="mDIYBase64ToImagePopulator" class="com.acc.populator.MDIYBase64ToImagePopulator">
+	</bean>
+	<bean id="mdiYBase64ToImageConverter" parent="abstractPopulatingConverter">
+		<lookup-method name="createTarget" bean="imageQualityData"/>
+		<property name="populators">
+			<list>
+				<ref bean="mDIYBase64ToImagePopulator" />
+			</list>
+		</property>
 	</bean>
 		
 </beans>

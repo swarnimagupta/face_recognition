@@ -28,8 +28,8 @@ public class MDIYSubmitUserFacadeImpl implements MDIYSubmitUserFacade
 
 	private MDIYSubmitUserService mdiYSubmitUserService;
 
-	@Resource(name = "mdiYImageConverter")
-	private Converter<String, ImageQualityData> mdiYImageConverter;
+	@Resource(name = "mdiYBase64ToImageConverter")
+	private Converter<String, ImageQualityData> mdiYBase64ToImageConverter;
 
 	@Resource(name = "customCsrCustomerDetailsConverter")
 	private Converter<MDIUser, CSRCustomerDetailsModel> mdiYCSRCustomerConverter;
@@ -63,7 +63,7 @@ public class MDIYSubmitUserFacadeImpl implements MDIYSubmitUserFacade
 		}
 		else
 		{
-			final ImageQualityData mdiYImageData = mdiYImageConverter.convert(user.getImageInBase64());
+			final ImageQualityData mdiYImageData = mdiYBase64ToImageConverter.convert(user.getImageInBase64());
 			CSRCustomerDetailsModel model = modelService.create(CSRCustomerDetailsModel.class);
 			model.setImageUrl(mdiYImageData.getImagePath());
 			model = mdiYCSRCustomerConverter.convert(user, model);

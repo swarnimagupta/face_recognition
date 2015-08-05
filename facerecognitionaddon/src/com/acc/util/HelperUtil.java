@@ -25,11 +25,12 @@ public class HelperUtil
 	/**
 	 * @param uid
 	 */
-	public static void createDirectory(final String uid)
+	public static String createDirectory(final String uid)
 	{
-		String location = "C:" + HYBRIS_DATA;
+		StringBuilder location = new StringBuilder("C:" + HYBRIS_DATA);
 		final String dateTime = new DateTime().toString("dd-MM-yy HH:mm:ss");
-		File g = new File(location + IMAGE2);
+		location.append(IMAGE2);
+		File g = new File(location.toString());
 		if (!g.exists())
 		{
 			if (g.mkdir())
@@ -40,8 +41,9 @@ public class HelperUtil
 			{
 				LOG.debug("Failed to create directory!" + dateTime.toString());
 				//creating for linux or mac
-				location = HYBRIS_DATA;
-				g = new File(location + IMAGE2);
+				location = new StringBuilder(HYBRIS_DATA);
+				location.append(IMAGE2);
+				g = new File(location.toString());
 				if (!g.exists())
 				{
 					if (g.mkdir())
@@ -58,17 +60,20 @@ public class HelperUtil
 		else
 		{
 			final String output = dateTime.toString().replace(":", "-");
+			location.append(SEPARATOR).append(output);
 			final File f = new File(g + SEPARATOR + output);
 			LOG.debug("datetime Directory is created!" + output + g.toString());
 			f.mkdir();
 			LOG.debug("datetime Directory is created after f!" + f.toString());
 			if (f.exists())
 			{
+				location.append(SEPARATOR).append(uid);
 				final File e = new File(f + SEPARATOR + uid);
 				e.mkdir();
 				LOG.debug("customerID folder is created after f!" + f.toString());
 			}
 		}
+		return location.toString();
 	}
 
 	/**

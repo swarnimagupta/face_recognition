@@ -57,7 +57,7 @@ public class MDIYSaveCustomerDataFacadeImpl implements MDIYSaveCustomerDataFacad
 	public ImageQualityData saveCustomerImage(final BufferedImage image)
 	{
 		final CustomerModel model = (CustomerModel) userService.getUserForUID("uid");
-		HelperUtil.createDirectory(model.getUid());
+		final String directoryPath = HelperUtil.createDirectory(model.getUid());
 		return null;
 	}
 
