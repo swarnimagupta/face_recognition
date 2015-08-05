@@ -9,17 +9,17 @@ import de.hybris.platform.servicelayer.dto.converter.Converter;
 import de.hybris.platform.servicelayer.user.UserService;
 
 import java.awt.image.BufferedImage;
-import java.io.File;
 
 import javax.annotation.Resource;
 
-import org.joda.time.DateTime;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.acc.data.ImageQualityData;
 import com.acc.facade.MDIYSaveCustomerDataFacade;
 import com.acc.model.ImageQualityModel;
 import com.acc.service.MDIYSaveCustomerDataService;
+import com.acc.util.HelperUtil;
 
 
 /**
@@ -29,6 +29,8 @@ import com.acc.service.MDIYSaveCustomerDataService;
 
 public class MDIYSaveCustomerDataFacadeImpl implements MDIYSaveCustomerDataFacade
 {
+
+	private static final Logger LOG = Logger.getLogger(MDIYSaveCustomerDataFacadeImpl.class);
 
 	@Autowired
 	private UserService userService;
@@ -51,49 +53,14 @@ public class MDIYSaveCustomerDataFacadeImpl implements MDIYSaveCustomerDataFacad
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.acc.core.facade.MDIYSaveCustomerDataFacade#saveCustomerImage(java.awt.image.BufferedImage)
 	 */
 	@Override
 	public ImageQualityData saveCustomerImage(final BufferedImage image)
 	{
 		final CustomerModel model = (CustomerModel) userService.getUserForUID("uid");
-		final String location = "C:\\hybris-5.1.0\\hybris\\data\\";
-		final String dateTime = new DateTime().toString("dd-MM-yy HH:mm:ss");
-		final File g = new File(location + "\\image\\");
-		if (!g.exists())
-		{
-			if (g.mkdir())
-			{
-				System.out.println("image Directory is created!" + dateTime.toString());
-			}
-			else
-			{
-				System.out.println("Failed to create directory!" + dateTime.toString());
-
-			}
-		}
-
-		else
-		{
-			final String output = dateTime.toString().replace(":", "-"); // Replace colons for compatibility with the Mac HFS+ file system.
-
-
-			final File f = new File(g + "\\" + output);
-
-			System.out.println("datetime Directory is created!" + output + g.toString());
-			f.mkdir();
-			System.out.println("datetime Directory is created after f!" + f.toString());
-			if (f.exists())
-			{
-				final File e = new File(f + "\\" + model.getUid());
-				e.mkdir();
-				System.out.println("customerID folder is created after f!" + f.toString());
-
-			}
-		}
-
-		// YTODO Auto-generated method stub
+		HelperUtil.createDirectory(model.getUid());
 		return null;
 	}
 

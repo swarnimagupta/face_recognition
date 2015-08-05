@@ -102,8 +102,6 @@
 		</property>
 	</bean>
 	
-	<bean id="customerData" class="com.acc.data.CustomerData" scope="prototype"/>
-
 	<bean id="customerDataConverter" parent="abstractPopulatingConverter">
 		<lookup-method name="createTarget" bean="customerData"/>
 		<property name="populators">
@@ -117,10 +115,61 @@
 		<property name="modelService" ref="modelService"/>
 	</bean>
 	
+<!-- 	<bean id=" submitUserProfileService "  -->
+<!--               class="<full path as in middleware jar file>.ApplicationSubmitUserInterface"> -->
+<!-- 	</bean> -->
+	
 	
 	<bean id="mdiYSubmitUserFacade" class="com.acc.facade.impl.MDIYSubmitUserFacadeImpl">
-		<property name=" mdiYSubmitUserService" ref="mdiYSubmitUserService"/>
+		<property name="mdiYSubmitUserService" ref="mdiYSubmitUserService"/>
+		<property name="modelService" ref="modelService"/>
 	</bean>
 		
-			
+	<bean id="mdiYSubmitUserService" class="com.acc.service.impl.MDIYSubmitUserServiceImpl">
+		<property name="mdiYSubmitUserDao" ref="mdiYSubmitUserDao"/>
+		<property name="modelService" ref="modelService"/>
+	</bean>
+	
+	<bean id="mdiYSubmitUserDao" class="com.acc.dao.impl.MDIYSubmitUserDaoImpl">
+		<property name="flexibleSearchService" ref="flexibleSearchService"/>
+	</bean>
+	
+	<bean id="customCsrCustomerDetailsPopulator" class="com.acc.populator.MDIYCSRCustomerPopulator">
+	</bean>
+	
+	<bean id="mdiUser" class="com.acc.domain.dummy.MDIUser">
+	</bean>
+	
+	<bean id="customCsrCustomerDetailsConverter" parent="abstractPopulatingConverter">
+		<lookup-method name="createTarget" bean="mdiUser"/>
+		<property name="populators">
+			<list>
+				<ref bean="customCsrCustomerDetailsPopulator" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="mDIYImageToBase64Populator" class="com.acc.populator.MDIYImageToBase64Populator">
+	</bean>
+	<bean id="mdiYImagesToStringConverter" parent="abstractPopulatingConverter">
+		<lookup-method name="createTarget" bean="java.lang.String"/>
+		<property name="populators">
+			<list>
+				<ref bean="mDIYImageToBase64Populator" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="mDIYCustomerInformationFacade" class="com.acc.facade.impl.MDIYCustomerInformationFacadeImpl">
+		<property name="mDIYCustomerInformationService" ref="mDIYCustomerInformationService"/>
+	</bean>
+		
+	<bean id="mDIYCustomerInformationService" class="com.acc.service.impl.MDIYCustomerInformationServiceImpl">
+		<property name="mDIYCustomerInformationDao" ref="mDIYCustomerInformationDao"/>
+	</bean>
+	
+	<bean id="mDIYCustomerInformationDao" class="com.acc.dao.impl.MDIYCustomerInformationDaoImpl">
+		<constructor-arg value="ImageQuality"/>
+	</bean>
+		
 </beans>
