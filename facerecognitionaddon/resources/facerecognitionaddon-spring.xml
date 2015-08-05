@@ -181,5 +181,16 @@
 			</list>
 		</property>
 	</bean>
+	
+	<bean id="mDIYCustomerToCSRCustomerPopulator" class="com.acc.populator.MDIYCustomerToCSRCustomerPopulator">
+	</bean>
+	<bean id="mdiYCustomerToCSRCustomerConverter" parent="abstractPopulatingConverter">
+		<lookup-method name="createTarget" bean="CSRCustomerDetailsModel"/>
+		<property name="populators">
+			<list>
+				<ref bean="mDIYCustomerToCSRCustomerPopulator" />
+			</list>
+		</property>
+	</bean>
 		
 </beans>
