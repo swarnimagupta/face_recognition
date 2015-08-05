@@ -18,10 +18,6 @@
 
 <items 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 			xsi:noNamespaceSchemaLocation="items.xsd">
-	<collectiontypes>
-		<collectiontype elementtype="java.lang.string" code="Identifiercodes"
-			 autocreate="true" generate="true" type="list"/>
-	</collectiontypes>
 	<enumtypes>
 		<enumtype code="Complexion" autocreate="true" generate="true">
 			<value code="VeryFair"></value>
@@ -56,19 +52,19 @@
 		<itemtype code="ImageQuality" autocreate="true" generate="true">
 			<deployment table="ImageQuality" typecode="11012"/>
 				<attributes>
-					<attribute type="java.lang.string" qualifier="qualityscore">
+					<attribute type="java.lang.String" qualifier="qualityScore">
 						<description>quality of the photo uploaded</description>
 							<modifiers read="true" write="true" search="true"
 								 optional="true"/>
 							<persistence type="property"></persistence>
 					</attribute>
-					<attribute type="java.lang.Integer" qualifier="IdentityId">
+					<attribute type="java.lang.Integer" qualifier="identityId">
 						<description>BiometricId</description>
 								<modifiers read="true" write="true" search="true" 
 							optional="true"/>
 						<persistence type="property"></persistence>
 					</attribute>
-					<attribute type="java.lang.string" qualifier="ImagePath">
+					<attribute type="java.lang.String" qualifier="imagePath">
 						<description>Customer's Image</description>
 							<modifiers read="true" write="true" search="true" 
 									optional="true"/>
@@ -79,6 +75,20 @@
 		<itemtype code="FaceRecognitionComponent" autocreate="true"
 				generate="true" extends="SimpleCMSComponent"
 				jaloclass="de.hybris.platform.cms2lib.components.FaceRecognitionComponent">
+		</itemtype>
+		<itemtype code="CSRCustomerDetails" autocreate="false"
+				generate="false" extends="GenericItem">
+				<attributes>
+					<attribute qualifier="complexion" type="Complexion">
+						<modifiers read="true" write="true" search="true" optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="java.lang.String" qualifier="imageUrl">
+						<description>Customer's Image</description>
+							<modifiers read="true" write="true" search="true" optional="true"/>
+							<persistence type="property"></persistence>
+					</attribute>
+				</attributes>
 		</itemtype>
 	</itemtypes>
 

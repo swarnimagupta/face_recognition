@@ -36,7 +36,7 @@ public class MDIYSubmitUserController
 	public StatusData submitUser(final HttpServletRequest request)
 	{
 		//final MDIUser user = submitUserProfileService.submitUser(request);
-		final MDIUser user;
+		final MDIUser user = new MDIUser();
 		return mdiYSubmitUserFacade.addUserToQueue(user);
 
 	}
