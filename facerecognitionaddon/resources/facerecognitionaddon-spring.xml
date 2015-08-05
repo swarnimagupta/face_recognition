@@ -82,7 +82,7 @@
 	       <aop:pointcut id="profiledMethods" expression="execution(* *(..))" />	
 	  -->
 	<bean id="mdiySaveCustomerDataFacade" class="com.acc.facade.impl.MDIYSaveCustomerDataFacadeImpl">
-		<property name="mdiySaveCustomerDataService" ref=" mdiySaveCustomerDataService"/>
+		<property name="mdiySaveCustomerDataService" ref="mdiySaveCustomerDataService"/>
 		<property name="modelService" ref="modelService"/>
 	</bean>	
 
