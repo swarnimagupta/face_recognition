@@ -31,12 +31,21 @@
 			<property name="complexion" type="java.lang.String"/>
 	</bean>
 	<bean class="com.acc.data.ImageQualityData">
-		<property name="imagePath " type=" java.lang.String "/>
-		<property name="qualityScore" type=" java.lang.String "/>
+		<property name="imagePath" type="java.lang.String"/>
+		<property name="qualityScore" type="java.lang.String"/>
 		<property name="identificationIds" type="java.util.List&lt;java.lang.String>"/>
 	</bean>
 	<bean class="com.acc.data.StatusData">
 		<property name="status" type="String"/>
 	</bean>
-
+	<bean class="com.acc.facades.CSRCustomerDetails.data.CSRCustomerDetailsData">
+		<property name="complexion" type="java.lang.String"/>
+		<property name="imageUrl" type="java.lang.String"/>
+	</bean> 
+	<bean class="com.acc.data.ConfigData">
+		<property name="value" type="String"/>
+	</bean>
+	<bean class="com.acc.data.ImageData">
+		<property name="imagesList" type="java.util.List&lt;java.lang.String>"/>
+	</bean>
 </beans>
