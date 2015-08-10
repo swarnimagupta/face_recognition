@@ -23,7 +23,7 @@ public class ImageQualityPopulator implements Populator<ImageQualityModel, Image
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see de.hybris.platform.converters.Populator#populate(java.lang.Object, java.lang.Object)
 	 */
 	@Override
@@ -33,7 +33,7 @@ public class ImageQualityPopulator implements Populator<ImageQualityModel, Image
 		{
 			final List<String> identityIds = new ArrayList<String>();
 			identityIds.add(String.valueOf(source.getIdentityId()));
-			target.setQualityScore(String.valueOf(source.getQualityscore()));
+			target.setQualityScore(String.valueOf(source.getQualityScore()));
 			target.setIdentificationIds(identityIds);
 			target.setImagePath(source.getImagePath());
 		}

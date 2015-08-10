@@ -26,13 +26,12 @@ public class MDIYImageToBase64Populator implements Populator<ImageQualityModel, 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see de.hybris.platform.converters.Populator#populate(java.lang.Object, java.lang.Object)
 	 */
 	@Override
 	public void populate(final ImageQualityModel source, String target) throws ConversionException
 	{
-		Assert.notNull(source);
 		Assert.notNull(source, "Parameter source cannot be null.");
 		Assert.notNull(target, "Parameter target cannot be null.");
 		final File file = new File(source.getImagePath());

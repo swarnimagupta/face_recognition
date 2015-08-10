@@ -43,7 +43,7 @@ public class MDIYCustomerImagesController
 	public ImageData getCustomerImages(final HttpServletRequest request) throws UnsupportedEncodingException, IOException,
 			ParseException
 	{
-		LOG.info("::::::: in sendCustomerGreetings POST request method :::::::");
+		LOG.info("::::::: in getCustomerImages POST request method :::::::");
 		final WebservicesUtil webservicesUtil = new WebservicesUtil();
 		final StringBuffer sbuf = webservicesUtil.getJsonBodyString(request);
 		LOG.info("::::::: json object string is :::::::" + sbuf);

@@ -9,6 +9,7 @@ import de.hybris.platform.servicelayer.search.FlexibleSearchService;
 import de.hybris.platform.servicelayer.search.SearchResult;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.hsqldb.HsqlException;
 
 import com.acc.dao.MDIYSubmitUserDao;
 
@@ -30,11 +31,18 @@ public class MDIYSubmitUserDaoImpl implements MDIYSubmitUserDao
 	@Override
 	public CustomerModel doesCustomerExist(final String identityId)
 	{
-		final FlexibleSearchQuery flexibleQuery = new FlexibleSearchQuery(
-				"select {pk} from {Customer} where {imageQuality}=(select {pk} from {ImageQuality} " + "where {identityId}='"
-						+ identityId + "')");
-		final SearchResult<CustomerModel> result = flexibleSearchService.search(flexibleQuery);
-		return CollectionUtils.isNotEmpty(result.getResult()) ? result.getResult().get(0) : null;
+		final FlexibleSearchQuery flexibleQuery = new FlexibleSearchQuery("select {customer} from {ImageQuality} "
+				+ "where {identityId}=\"" + identityId + "\"");
+		try
+		{
+			final SearchResult<CustomerModel> result = flexibleSearchService.search(flexibleQuery);
+			return CollectionUtils.isNotEmpty(result.getResult()) ? result.getResult().get(0) : null;
+		}
+		catch (final HsqlException e)
+		{
+			return null;
+		}
+
 	}
 
 	/**

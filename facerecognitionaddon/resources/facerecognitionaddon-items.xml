@@ -30,8 +30,12 @@
 	<relations>
 		<relation code="Customer2ImageQualityRel" autocreate="true" generate="true" localized="false">
 			 <description>This is the link between customer and image</description>
-			 <sourceElement type="Customer" qualifier="customer" cardinality="one"></sourceElement>
-			 <targetElement type="ImageQuality" qualifier="imageQuality" cardinality="many"></targetElement>
+			 <sourceElement type="Customer" qualifier="customer" cardinality="one">
+			 	<modifiers read="true" write="true" search="true" optional="false"/>
+			 </sourceElement>
+			 <targetElement type="ImageQuality" qualifier="imageQuality" cardinality="many">
+			 	<modifiers read="true" write="true" search="true" optional="true"/>
+			 </targetElement>
 		 </relation>
 	</relations>
 	<itemtypes>
