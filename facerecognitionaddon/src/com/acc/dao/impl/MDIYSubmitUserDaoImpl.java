@@ -9,7 +9,6 @@ import de.hybris.platform.servicelayer.search.FlexibleSearchService;
 import de.hybris.platform.servicelayer.search.SearchResult;
 
 import org.apache.commons.collections.CollectionUtils;
-import org.hsqldb.HsqlException;
 
 import com.acc.dao.MDIYSubmitUserDao;
 
@@ -25,7 +24,7 @@ public class MDIYSubmitUserDaoImpl implements MDIYSubmitUserDao
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.acc.dao.MDIYSubmitUserDao#doesCustomerExist(java.lang.String)
 	 */
 	@Override
@@ -38,7 +37,7 @@ public class MDIYSubmitUserDaoImpl implements MDIYSubmitUserDao
 			final SearchResult<CustomerModel> result = flexibleSearchService.search(flexibleQuery);
 			return CollectionUtils.isNotEmpty(result.getResult()) ? result.getResult().get(0) : null;
 		}
-		catch (final HsqlException e)
+		catch (final Exception e)
 		{
 			return null;
 		}
