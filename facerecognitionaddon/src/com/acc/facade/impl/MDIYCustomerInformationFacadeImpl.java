@@ -5,7 +5,7 @@ package com.acc.facade.impl;
 
 import de.hybris.platform.servicelayer.dto.converter.Converter;
 
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -36,13 +36,12 @@ public class MDIYCustomerInformationFacadeImpl implements MDIYCustomerInformatio
 	@Override
 	public void getCustomerImages(final String customerId, final ImageData imageData)
 	{
-		final Collection<ImageQualityModel> imagesList = mDIYCustomerInformationService.getCustomerImages(customerId);
-		final List<String> images = imageData.getImagesList();
-		for (final ImageQualityModel image : imagesList)
+		final ImageQualityModel image = mDIYCustomerInformationService.getCustomerImages(customerId);
+		final List<String> imagesList = new ArrayList<String>();
+		if (null != image)
 		{
-			images.add(mdiYImagesToStringConverter.convert(image));
+			imagesList.add(image.getImagePath());
 		}
-		imageData.setImagesList(images);
 	}
 
 	/**

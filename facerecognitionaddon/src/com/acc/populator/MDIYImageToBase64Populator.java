@@ -26,7 +26,7 @@ public class MDIYImageToBase64Populator implements Populator<ImageQualityModel, 
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see de.hybris.platform.converters.Populator#populate(java.lang.Object, java.lang.Object)
 	 */
 	@Override
@@ -34,22 +34,25 @@ public class MDIYImageToBase64Populator implements Populator<ImageQualityModel, 
 	{
 		Assert.notNull(source, "Parameter source cannot be null.");
 		Assert.notNull(target, "Parameter target cannot be null.");
-		final File file = new File(source.getImagePath());
-		try
+		if (null != source)
 		{
-			final FileInputStream imageInFile = new FileInputStream(file);
-			final byte imageData[] = new byte[(int) file.length()];
-			imageInFile.read(imageData);
-			target = HelperUtil.encodeImage(imageData);
-			imageInFile.close();
-		}
-		catch (final FileNotFoundException e)
-		{
-			System.out.println("Image not found" + e);
-		}
-		catch (final IOException ioe)
-		{
-			System.out.println("Exception while reading the Image " + ioe);
+			final File file = new File(source.getImagePath());
+			try
+			{
+				final FileInputStream imageInFile = new FileInputStream(file);
+				final byte imageData[] = new byte[(int) file.length()];
+				imageInFile.read(imageData);
+				target = HelperUtil.encodeImage(imageData);
+				imageInFile.close();
+			}
+			catch (final FileNotFoundException e)
+			{
+				System.out.println("Image not found" + e);
+			}
+			catch (final IOException ioe)
+			{
+				System.out.println("Exception while reading the Image " + ioe);
+			}
 		}
 	}
 

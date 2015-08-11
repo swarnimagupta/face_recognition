@@ -7,8 +7,6 @@ import de.hybris.platform.servicelayer.internal.dao.DefaultGenericDao;
 import de.hybris.platform.servicelayer.search.FlexibleSearchQuery;
 import de.hybris.platform.servicelayer.search.SearchResult;
 
-import java.util.Collection;
-
 import org.apache.commons.collections.CollectionUtils;
 
 import com.acc.dao.MDIYCustomerInformationDao;
@@ -33,18 +31,18 @@ public class MDIYCustomerInformationDaoImpl extends DefaultGenericDao<ImageQuali
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.acc.dao.MDIYCustomerInformationDao#getCustomerImages(java.lang.String)
 	 */
 	@Override
-	public Collection<ImageQualityModel> getCustomerImages(final String customerId)
+	public ImageQualityModel getCustomerImages(final String customerId)
 	{
 
 		final FlexibleSearchQuery query = new FlexibleSearchQuery(
 				"select {pk} from {ImageQuality} where {customer}=(select {pk} from {customer} where {customerId} like '"
 						+ customerId + "%')");
 		final SearchResult<ImageQualityModel> result = getFlexibleSearchService().search(query);
-		return CollectionUtils.isNotEmpty(result.getResult()) ? result.getResult() : CollectionUtils.EMPTY_COLLECTION;
+		return CollectionUtils.isNotEmpty(result.getResult()) ? result.getResult().get(0) : null;
 	}
 
 }

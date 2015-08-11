@@ -3,8 +3,6 @@
  */
 package com.acc.service;
 
-import java.util.Collection;
-
 import com.acc.model.ImageQualityModel;
 
 
@@ -14,5 +12,5 @@ import com.acc.model.ImageQualityModel;
  */
 public interface MDIYCustomerInformationService
 {
-	public Collection<ImageQualityModel> getCustomerImages(String customerId);
+	public ImageQualityModel getCustomerImages(String customerId);
 }

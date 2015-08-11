@@ -3,8 +3,6 @@
  */
 package com.acc.service.impl;
 
-import java.util.Collection;
-
 import com.acc.dao.MDIYCustomerInformationDao;
 import com.acc.model.ImageQualityModel;
 import com.acc.service.MDIYCustomerInformationService;
@@ -20,11 +18,11 @@ public class MDIYCustomerInformationServiceImpl implements MDIYCustomerInformati
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.acc.service.MDIYCustomerInformationService#getCustomerImages(java.lang.String)
 	 */
 	@Override
-	public Collection<ImageQualityModel> getCustomerImages(final String customerId)
+	public ImageQualityModel getCustomerImages(final String customerId)
 	{
 		return mDIYCustomerInformationDao.getCustomerImages(customerId);
 	}
