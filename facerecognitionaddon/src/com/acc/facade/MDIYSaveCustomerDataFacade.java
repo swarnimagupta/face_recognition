@@ -5,9 +5,7 @@ package com.acc.facade;
 
 import de.hybris.platform.core.model.user.CustomerModel;
 
-import java.awt.image.BufferedImage;
-
-import com.acc.data.ImageQualityData;
+import com.acc.data.StatusData;
 
 
 /**
@@ -20,9 +18,9 @@ public interface MDIYSaveCustomerDataFacade
 	public void saveCustomerData(CustomerModel model);
 
 	/**
-	 * @param image
-	 * @return
+	 * @param imageInBase64
+	 * @param customerId
+	 * @return StatusData
 	 */
-	@SuppressWarnings("javadoc")
-	public ImageQualityData saveCustomerImage(final BufferedImage image);
+	public StatusData saveCustomerImage(final String imageInBase64, final String customerId);
 }

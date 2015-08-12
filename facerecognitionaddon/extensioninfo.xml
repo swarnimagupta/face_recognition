@@ -24,6 +24,7 @@
 		<requires-extension name="wishlist"/>
 		<requires-extension name="addonsupport"/>
 		<requires-extension name="acceleratorstorefrontcommons" />
+		<requires-extension name="servicecore"/>
 
 		<coremodule generated="true" manager="com.acc.jalo.FacerecognitionaddonManager" packageroot="com.acc"/>
 

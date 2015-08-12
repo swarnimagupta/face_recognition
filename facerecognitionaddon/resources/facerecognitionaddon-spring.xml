@@ -81,8 +81,10 @@
 	      	            !execution(* getPK(..))" />  	            
 	       <aop:pointcut id="profiledMethods" expression="execution(* *(..))" />	
 	  -->
-	<bean id="mdiySaveCustomerDataFacade" class="com.acc.facade.impl.MDIYSaveCustomerDataFacadeImpl">
+	<bean id="mDIYSaveCustomerDataFacade" class="com.acc.facade.impl.MDIYSaveCustomerDataFacadeImpl">
+		<property name="userService" ref="userService"/>
 		<property name="mdiySaveCustomerDataService" ref="mdiySaveCustomerDataService"/>
+		<property name="modelService" ref="modelService"/>
 	</bean>	
 
 	<!-- <bean id="profileHelper" class="ProfileHelper_path" > 
@@ -192,5 +194,17 @@
 			</list>
 		</property>
 	</bean>
-		
+	
+	<bean id="submitUserInterface" class="com.acc.general.impl.MDIYApplicationSubmitUserImpl">
+		<property name="mdiYSubmitUserService" ref="mdiYSubmitUserService"/>
+		<property name="modelService" ref="modelService"/>
+	</bean>
+	
+	<bean id="requestResponseBean" class="com.frs.bean.MDIRequestResponseBean">
+	</bean>
+	
+	<bean id="mDIApplicationSubmitUserUtil" class="com.frs.submitUser.MDIApplicationSubmitUserUtil">
+		<property name="submitUserInterface" ref="submitUserInterface"/>
+		<property name="requestResponseBean" ref="requestResponseBean"/>
+	</bean>
 </beans>
