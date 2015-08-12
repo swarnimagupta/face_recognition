@@ -41,7 +41,7 @@ public class MDIApplicationSubmitUserUtil {
 		// Gets the populated request response bean from the input request 
 		MDIRequestResponseBean requestResponseBean = profileUtilObject.getBeanFromRequest(request);
 		
-		if(requestResponseBean.getUser().getBiometricId().isEmpty()){
+		if(requestResponseBean.getUser().getBiometricId()==null || requestResponseBean.getUser().getBiometricId()==""){
 			// If the biometric id is empty , he is an unregistered user.
 			// Route him to notifyAgentForNewUser() 
 			statusData = submitUserInterface.notifyAgentForNewUser(requestResponseBean);

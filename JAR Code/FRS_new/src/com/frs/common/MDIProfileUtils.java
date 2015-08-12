@@ -180,14 +180,19 @@ public class MDIProfileUtils implements MDIProfileUtilsInterface , MDIConstants{
 			try {
 				// Parse Input json and get the user object
 				JSONObject jsonMainObject = (JSONObject)jsonParser.parse(inputJson);
-				JSONObject jsonUserObject = (JSONObject)jsonMainObject.get(MDIConstants.USER);
-				
-				
+				//JSONObject jsonUserObject = (JSONObject)jsonMainObject.get(MDIConstants.USER);
+
 				// From the user object set the appropriate values to User bean
-				mdiUser.setBiometricId((String)jsonUserObject.get(MDIConstants.BIOMETRIC_USER_ID));
-				mdiUser.setAge(Integer.parseInt(jsonUserObject.get(MDIConstants.CUSTOMER_AGE).toString()));
-				mdiUser.setComplexion((String)jsonUserObject.get(MDIConstants.CUSTOMER_COMPLEXION));
-				mdiUser.setGender((String)jsonUserObject.get(MDIConstants.CUSTOMER_GENDER));
+				if(null!=jsonMainObject.get(MDIConstants.BIOMETRIC_ID))
+					mdiUser.setBiometricId((String)jsonMainObject.get(MDIConstants.BIOMETRIC_ID));
+				if(null!=jsonMainObject.get(MDIConstants.IMAGEINBASE64))
+					mdiUser.setImageInBase64((String)jsonMainObject.get(MDIConstants.IMAGEINBASE64));
+				if(null!=jsonMainObject.get(MDIConstants.AGE))
+					mdiUser.setAge(Integer.parseInt(jsonMainObject.get(MDIConstants.AGE).toString()));
+				if(null!=jsonMainObject.get(MDIConstants.COMPLEXION))
+					mdiUser.setComplexion((String)jsonMainObject.get(MDIConstants.COMPLEXION));
+				if(null!=jsonMainObject.get(MDIConstants.CUSTOMER_GENDER))
+					mdiUser.setGender((String)jsonMainObject.get(MDIConstants.CUSTOMER_GENDER));
 				
 			} catch (ParseException e) {
 				System.out.println("Parser Exception. \n");

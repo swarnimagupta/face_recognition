@@ -47,9 +47,17 @@ public interface MDIConstants {
 	
 	public String BIOMETRIC_USER_ID = "BiometricUserId";
 	
+	public String BIOMETRIC_ID = "biometricId";
+	
 	public String CUSTOMER_AGE = "Age";
 	
+	public String AGE = "age";
+	
 	public String CUSTOMER_COMPLEXION = "Complexion";
+	
+	public String COMPLEXION = "complexion";
+	
+	public String IMAGEINBASE64 = "imageInBase64";
 	
 	public String CUSTOMER_GENDER = "Gender";
 	
