@@ -35,11 +35,11 @@ public class HelperUtil
 		{
 			if (g.mkdir())
 			{
-				LOG.debug("image Directory is created!" + dateTime.toString());
+				LOG.info("image Directory is created!" + dateTime.toString());
 			}
 			else
 			{
-				LOG.debug("Failed to create directory!" + dateTime.toString());
+				LOG.info("Failed to create directory!" + dateTime.toString());
 				//creating for linux or mac
 				location = new StringBuilder(HYBRIS_DATA);
 				location.append(IMAGE2);
@@ -48,11 +48,11 @@ public class HelperUtil
 				{
 					if (g.mkdir())
 					{
-						LOG.debug("image Directory is created!" + dateTime.toString());
+						LOG.info("image Directory is created!" + dateTime.toString());
 					}
 					else
 					{
-						LOG.debug("Failed to create directory!" + dateTime.toString());
+						LOG.info("Failed to create directory!" + dateTime.toString());
 					}
 				}
 			}
@@ -62,15 +62,15 @@ public class HelperUtil
 			final String output = dateTime.toString().replace(":", "-");
 			location.append(SEPARATOR).append(output);
 			final File f = new File(g + SEPARATOR + output);
-			LOG.debug("datetime Directory is created!" + output + g.toString());
+			LOG.info("datetime Directory is created!" + output + g.toString());
 			f.mkdir();
-			LOG.debug("datetime Directory is created after f!" + f.toString());
+			LOG.info("datetime Directory is created after f!" + f.toString());
 			if (f.exists())
 			{
 				location.append(SEPARATOR).append(uid);
 				final File e = new File(f + SEPARATOR + uid);
 				e.mkdir();
-				LOG.debug("customerID folder is created after f!" + f.toString());
+				LOG.info("customerID folder is created after f!" + f.toString());
 			}
 		}
 		return location.toString();

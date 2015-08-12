@@ -138,7 +138,7 @@
 	<bean id="customCsrCustomerDetailsPopulator" class="com.acc.populator.MDIYCSRCustomerPopulator">
 	</bean>
 	
-	<bean id="mdiUser" class="com.acc.domain.dummy.MDIUser">
+	<bean id="mdiUser" class="com.frs.bean.MDIUser">
 	</bean>
 	
 	<bean id="customCsrCustomerDetailsConverter" parent="abstractPopulatingConverter">

@@ -18,7 +18,7 @@
 	<classpathentry kind="lib" path="lib/json-simple-1.1.jar"/>
 	<classpathentry kind="lib" path="lib/org.json-chargebee-1.0.jar"/>
 	<classpathentry kind="src" path="/servicecore"/>
-	<classpathentry kind="lib" path="lib/FRS.jar"/>
 	<classpathentry kind="lib" path="lib/jersey-bundle-1.19.jar"/>
+	<classpathentry kind="lib" path="lib/new.jar"/>
 	<classpathentry kind="output" path="eclipsebin/notused"/>
 </classpath>

@@ -10,6 +10,7 @@ import de.hybris.platform.servicelayer.model.ModelService;
 import javax.annotation.Resource;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
 
 import com.acc.data.ImageQualityData;
 import com.acc.model.CSRCustomerDetailsModel;
@@ -39,6 +40,9 @@ public class MDIYApplicationSubmitUserImpl implements MDIApplicationSubmitUserIn
 
 	private ModelService modelService;
 
+	private static final Logger LOG = Logger.getLogger(MDIYApplicationSubmitUserImpl.class);
+
+	private static int counter = 100;
 
 	/*
 	 * (non-Javadoc)
@@ -49,12 +53,15 @@ public class MDIYApplicationSubmitUserImpl implements MDIApplicationSubmitUserIn
 	@Override
 	public StatusData notifyAgentForNewUser(final MDIRequestResponseBean bean)
 	{
+		LOG.info("notifyAgentForNewUser");
 		final MDIUser user = bean.getUser();
 		final StatusData statusData = new StatusData();
 		final ImageQualityData mdiYImageData = mdiYBase64ToImageConverter.convert(user.getImageInBase64());
 		CSRCustomerDetailsModel model = modelService.create(CSRCustomerDetailsModel.class);
 		model.setImageUrl(mdiYImageData.getImagePath());
 		model = mdiYCSRCustomerConverter.convert(user, model);
+		model.setCustomerId(String.valueOf(counter));
+		counter++;
 		mdiYSubmitUserService.addUserToQueue(model);
 		statusData.setStatus("success");
 		return statusData;
@@ -70,6 +77,7 @@ public class MDIYApplicationSubmitUserImpl implements MDIApplicationSubmitUserIn
 	@Override
 	public StatusData notifyAgentForRegisteredUser(final MDIRequestResponseBean bean)
 	{
+		LOG.info("notifyAgentForNewUser");
 		final MDIUser user = bean.getUser();
 		final StatusData statusData = new StatusData();
 		final CustomerModel customer = mdiYSubmitUserService.doesCustomerExist(user.getBiometricId());

@@ -8,8 +8,8 @@ import de.hybris.platform.servicelayer.dto.converter.ConversionException;
 
 import org.springframework.util.Assert;
 
-import com.acc.domain.dummy.MDIUser;
 import com.acc.model.CSRCustomerDetailsModel;
+import com.frs.bean.MDIUser;
 
 
 /**
