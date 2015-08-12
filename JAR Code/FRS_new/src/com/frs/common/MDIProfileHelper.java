@@ -18,9 +18,11 @@ import com.frs.imagequality.InquireImageQualityClient;
 import com.frs.imagequality.MDIApplicationImageQualityInterface;
 import com.frs.persistUser.MDIApplicationNewUserInterface;
 import com.frs.persistUser.MDIPersistNewUserClient;
+import com.frs.submitUser.MDIApplicationSubmitUserUtil;
 import com.frs.submitUser.MDIApplicationSubmitUserInterface;
 import com.frs.submitUser.MDIHybrisClass;
 import com.frs.submitUser.MDIHybrisInterface;
+import com.frs.submitUser.StatusData;
 
 /**
  * @author Pavan
@@ -158,6 +160,8 @@ public class MDIProfileHelper implements MDIApplicationImageQualityInterface, MD
 	}
 
 	/*
+	 * METHOD IS NOT USED
+	 * 
 	 * Method is written to process submit user functionality
 	 * 
 	 * The method takes the inputJson, converts it into 
@@ -168,43 +172,17 @@ public class MDIProfileHelper implements MDIApplicationImageQualityInterface, MD
 	public boolean submitUser(String inputJson) {
 
 		MDIRequestResponseBean mdiRequestResponseBean = new MDIRequestResponseBean();
-		MDIApplicationSubmitUserInterface app;
-		MDIHybrisInterface hybrisInterface = new MDIHybrisClass();
-		boolean isProcessed;
+		MDIProfileUtils mdiProfileUtils = new MDIProfileUtils();
+		MDIApplicationSubmitUserUtil submitUserImpl = new MDIApplicationSubmitUserUtil();
+		boolean isProcessed = false;
 		
-		MDIUser mdiUser = processInputUser(inputJson);
-		mdiRequestResponseBean.setUser(mdiUser);
-		
-		isProcessed = hybrisInterface.hybrisMethod(mdiRequestResponseBean);
+			MDIUser mdiUser = mdiProfileUtils.processInputUser(inputJson);
+			mdiRequestResponseBean.setUser(mdiUser);
+			submitUserImpl.setRequestResponseBean(mdiRequestResponseBean);
+			
 		
 		return isProcessed;
 	}
 
-	
-	// The method accepts the inputJson and returns the user
-	public MDIUser processInputUser(String inputJson) {
-		
-		MDIUser mdiUser = new MDIUser();
-		
-		JSONParser jsonParser = new JSONParser();
-		try {
-			// Parse Input json and get the user object
-			JSONObject jsonMainObject = (JSONObject)jsonParser.parse(inputJson);
-			JSONObject jsonUserObject = (JSONObject)jsonMainObject.get(MDIConstants.USER);
-			
-			
-			// From the user object set the appropriate values to User bean
-			mdiUser.setBiometricId((String)jsonUserObject.get(MDIConstants.BIOMETRIC_USER_ID));
-			mdiUser.setAge(Integer.parseInt(jsonUserObject.get(MDIConstants.CUSTOMER_AGE).toString()));
-			mdiUser.setComplexion((String)jsonUserObject.get(MDIConstants.CUSTOMER_COMPLEXION));
-			mdiUser.setGender((String)jsonUserObject.get(MDIConstants.CUSTOMER_GENDER));
-			
-		} catch (ParseException e) {
-			System.out.println("Parser Exception. \n");
-			e.printStackTrace(); 
-		}
-		
-		return mdiUser;
-	}
 	
 }

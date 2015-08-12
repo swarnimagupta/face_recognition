@@ -23,7 +23,7 @@ public class TestImageClient {
 		//String json = "{\"Type\":\"Image\"}";
 		// String json = "123";
 		
-		String outputJson=client.getQuality(json);
+		String outputJson=client.getQualityWithoutUsingJersey(json);
 		
 		System.out.println("Webservice Output json : "+outputJson);
 		

@@ -25,7 +25,7 @@ public class MDISubmitUserProfileService{
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response submitUser(String json) {
-		
+		// METHOD IS NOT USED
 		boolean result;
 		
 			MDIProfileHelper mdiProfileHelper = new MDIProfileHelper();

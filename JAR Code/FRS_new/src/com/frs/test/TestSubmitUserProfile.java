@@ -3,6 +3,11 @@
  */
 package com.frs.test;
 
+import javax.servlet.http.HttpServletRequest;
+
+import com.frs.common.MDIProfileUtils;
+import com.frs.submitUser.MDIApplicationSubmitUserInterface;
+import com.frs.submitUser.MDIApplicationSubmitUserUtil;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
@@ -18,6 +23,9 @@ public class TestSubmitUserProfile {
 	/**
 	 * @param args
 	 */
+	
+	
+	
 	public static void main(String[] args) {
 
 		String json = "{ \"User\" : { \"Age\" : 26, \"BiometricUserId\" : \"user_id1\", \"Complexion\" : \"Black\", \"Gender\" : \"Male\"} }";
@@ -40,4 +48,9 @@ public class TestSubmitUserProfile {
 		
 	}
 
+	
 }
+
+
+
+

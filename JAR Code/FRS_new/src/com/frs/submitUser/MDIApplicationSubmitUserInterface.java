@@ -11,6 +11,7 @@ import com.frs.bean.MDIRequestResponseBean;
  */
 public interface MDIApplicationSubmitUserInterface {
 
-	public boolean submitUserForProcessing(MDIRequestResponseBean mdiRequestResponseBean);
+	public StatusData notifyAgentForRegisteredUser(MDIRequestResponseBean mdiRequestResponseBean);
+	public StatusData notifyAgentForNewUser(MDIRequestResponseBean mdiRequestResponseBean);
 	
 }

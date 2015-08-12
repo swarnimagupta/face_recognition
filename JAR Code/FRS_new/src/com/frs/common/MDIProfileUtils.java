@@ -6,11 +6,15 @@ package com.frs.common;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.Scanner;
 
 import javax.imageio.ImageIO;
+import javax.servlet.http.HttpServletRequest;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import com.frs.bean.MDIRequestResponseBean;
 import com.frs.bean.MDIUser;
@@ -139,4 +143,57 @@ public class MDIProfileUtils implements MDIProfileUtilsInterface , MDIConstants{
 		return jsonObj;
 	}
 	
+
+	public MDIRequestResponseBean getBeanFromRequest(HttpServletRequest request) {
+	
+		// get Json From Request
+		
+		Scanner scanner;
+		MDIRequestResponseBean requestResponseBean = new MDIRequestResponseBean();
+		try {
+			scanner = new Scanner(request.getInputStream());
+			String submitUserJson = scanner.useDelimiter("\\Z").next();
+		
+			// get Bean from Json
+		 
+			MDIUser mdiUser = processInputUser(submitUserJson);
+			requestResponseBean.setUser(mdiUser);
+		
+			scanner.close();
+		
+			} catch (IOException e) {
+			
+				System.out.println("IO Exception : \n");
+				e.printStackTrace();
+			
+			}
+		
+			return requestResponseBean;
+	}
+	
+		// The method accepts the inputJson and returns the user
+		public MDIUser processInputUser(String inputJson) {
+			
+			MDIUser mdiUser = new MDIUser();
+			
+			JSONParser jsonParser = new JSONParser();
+			try {
+				// Parse Input json and get the user object
+				JSONObject jsonMainObject = (JSONObject)jsonParser.parse(inputJson);
+				JSONObject jsonUserObject = (JSONObject)jsonMainObject.get(MDIConstants.USER);
+				
+				
+				// From the user object set the appropriate values to User bean
+				mdiUser.setBiometricId((String)jsonUserObject.get(MDIConstants.BIOMETRIC_USER_ID));
+				mdiUser.setAge(Integer.parseInt(jsonUserObject.get(MDIConstants.CUSTOMER_AGE).toString()));
+				mdiUser.setComplexion((String)jsonUserObject.get(MDIConstants.CUSTOMER_COMPLEXION));
+				mdiUser.setGender((String)jsonUserObject.get(MDIConstants.CUSTOMER_GENDER));
+				
+			} catch (ParseException e) {
+				System.out.println("Parser Exception. \n");
+				e.printStackTrace(); 
+			}
+			
+			return mdiUser;
+		}
 }
