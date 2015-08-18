@@ -19,10 +19,6 @@ import com.acc.data.StatusData;
 import com.acc.facade.MDIYSaveCustomerDataFacade;
 import com.acc.model.ImageQualityModel;
 import com.acc.service.MDIYSaveCustomerDataService;
-import com.frs.bean.MDIRequestResponseBean;
-import com.frs.bean.MDIUser;
-import com.frs.common.MDIProfileHelper;
-import com.frs.common.MDIProfileUtils;
 
 
 /**
@@ -62,21 +58,21 @@ public class MDIYSaveCustomerDataFacadeImpl implements MDIYSaveCustomerDataFacad
 	public StatusData saveCustomerImage(final String imageInBase64, final String customerId)
 	{
 		final CustomerModel model = storeLoginDao.isCustomerFound(customerId);
-		final MDIRequestResponseBean bean = new MDIRequestResponseBean();
-		final MDIUser user = new MDIUser();
-		LOG.info("imageInBase64" + imageInBase64);
-		LOG.info("customerId" + customerId);
-		user.setImageInBase64(imageInBase64);
-		user.setHybrisId(customerId);
-		bean.setUser(user);
-		final MDIProfileUtils util = new MDIProfileUtils();
-		final String inputJson = util.getJsonForNewUser(bean);
-		LOG.info("inputJson" + inputJson);
-		final MDIProfileHelper helper = new MDIProfileHelper();
-		final MDIRequestResponseBean outputBean = helper.newUser(inputJson);
-		final MDIUser outputUser = outputBean.getUser();
-		LOG.info("outputBean.getQualityScoreMap().get(Default.Cognitec850)"
-				+ outputBean.getQualityScoreMap().get("Default.Cognitec850"));
+		//		final MDIRequestResponseBean bean = new MDIRequestResponseBean();
+		//		final MDIUser user = new MDIUser();
+		//		LOG.info("imageInBase64" + imageInBase64);
+		//		LOG.info("customerId" + customerId);
+		//		user.setImageInBase64(imageInBase64);
+		//		user.setHybrisId(customerId);
+		//		bean.setUser(user);
+		//		final MDIProfileUtils util = new MDIProfileUtils();
+		//		final String inputJson = util.getJsonForNewUser(bean);
+		//		LOG.info("inputJson" + inputJson);
+		//		final MDIProfileHelper helper = new MDIProfileHelper();
+		//		final MDIRequestResponseBean outputBean = helper.newUser(inputJson);
+		//		final MDIUser outputUser = outputBean.getUser();
+		//		LOG.info("outputBean.getQualityScoreMap().get(Default.Cognitec850)"
+		//				+ outputBean.getQualityScoreMap().get("Default.Cognitec850"));
 
 
 		final ImageQualityData data = mdiYBase64ToImageConverter.convert(imageInBase64);
@@ -84,9 +80,9 @@ public class MDIYSaveCustomerDataFacadeImpl implements MDIYSaveCustomerDataFacad
 		qualityModel.setImagePath(data.getImagePath());
 		LOG.info("data.getImagePath()" + data.getImagePath());
 		qualityModel.setCustomer(model);
-		LOG.info("outputUser.getBiometricId()" + outputUser.getBiometricId());
-		qualityModel.setIdentityId(Integer.valueOf(outputUser.getBiometricId()));
-		qualityModel.setQualityScore(outputBean.getQualityScoreMap().get("Default.Cognitec850"));
+		//LOG.info("outputUser.getBiometricId()" + outputUser.getBiometricId());
+		//qualityModel.setIdentityId(Integer.valueOf(outputUser.getBiometricId()));
+		//qualityModel.setQualityScore(outputBean.getQualityScoreMap().get("Default.Cognitec850"));
 		modelService.save(qualityModel);
 		final StatusData status = new StatusData();
 		status.setStatus("success");
