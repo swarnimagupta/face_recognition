@@ -3,59 +3,43 @@
  */
 package com.frs.imagequality;
 
-import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.net.URI;
 
-import org.apache.commons.codec.binary.Base64;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.core.MediaType;
 
-import com.sun.jersey.api.client.Client;
-import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.client.WebResource;
-import com.sun.jersey.api.client.config.ClientConfig;
-import com.sun.jersey.api.client.config.DefaultClientConfig;
-import com.sun.jersey.api.client.filter.HTTPBasicAuthFilter;
+import org.glassfish.jersey.client.HttpUrlConnectorProvider;
 
 /**
  * @author Pavan
  *
  */
+
+
 public class InquireImageQualityClient {
 
+	
 	public String getQuality(String inputJson){
 		
 		System.out.println("getQuality() method starts..");
 		
-		String imageQualityOutputJson = null;
-		String imageQualityCheckUrl = "https://demo.uis.accenture.com/MEVISV2.0/api/Biometric/Pavan?Type=Image&Base64data=Image&Modality=Face_Face2D";
+		Client client = ClientBuilder.newClient();
+
+		client.property(HttpUrlConnectorProvider.SET_METHOD_WORKAROUND, true);
+		//String imageQualityOutputJson = client.target("https://demo.uis.accenture.com/MEVISV2.0/api/Biometric").request().header("Authorization", "Basic XGNsb3VkdXNlcjpEZW1vc3VpdGUyMDEzIyM=").method("quality",Entity.entity(inputJson, MediaType.APPLICATION_JSON), String.class);
 		
-		ClientConfig config = new DefaultClientConfig();
-		Client client = Client.create(config);
-		WebResource webResource = client.resource(imageQualityCheckUrl);
+		String imageQualityOutputJson = client.target(URI.create("https://demo.uis.accenture.com/MEVISV2.0/api/Biometric")).request().header("Authorization", "Basic XGNsb3VkdXNlcjpEZW1vc3VpdGUyMDEzIyM=").method("quality", Entity.entity(inputJson, MediaType.APPLICATION_JSON), String.class);
 		
-//		ClientResponse response = webResource.accept("application/json").header("Authorization", "Basic XGNsb3VkdXNlcjpEZW1vc3VpdGUyMDEzIyM=").post(ClientResponse.class, inputJson);
-//		ClientResponse response = webResource.accept("application/json").header("Authorization", "Basic XGNsb3VkdXNlcjpEZW1vc3VpdGUyMDEzIyM=").method("QUALITY", ClientResponse.class, inputJson);
-		ClientResponse response = webResource.accept("application/json").header("Authorization", "Basic XGNsb3VkdXNlcjpEZW1vc3VpdGUyMDEzIyM=").get(ClientResponse.class);
-		
-		if(response.getStatus() != 200){
-			System.out.println("Unable to Connect to the Server");
-		}
-		
-		imageQualityOutputJson = response.getEntity(String.class);
-		
-		System.out.println("getQuality() method ends ! Output Json is "+imageQualityOutputJson);
+		System.out.println("Response : "+imageQualityOutputJson);
 		
 		return imageQualityOutputJson;
+		
 	}
 	
 	
-	public String getQuality1(String inputJson){
+	/*public String getQuality1(String inputJson){
 		
 		System.out.println("getQuality1() method starts..");
 		
@@ -83,6 +67,7 @@ public class InquireImageQualityClient {
 		
 	}
 	
+	
 	public String getQualityWithoutUsingJersey(String inputJson){
 		
 		System.out.println("getQualityWithoutUsingJersey Starts...");
@@ -96,28 +81,25 @@ public class InquireImageQualityClient {
 
 			try {
 
-				URL targetUrl = new URL("https://demo.uis.accenture.com/MEVISV2.0/api/Biometric/QUALITY");
+				URL targetUrl = new URL("https://demo.uis.accenture.com/MEVISV2.0/api/Biometric/");
 
 				byte[] authEncBytes = Base64.encodeBase64(authString.getBytes());
 				String authStringEnc = new String(authEncBytes);
-
-				
 				
 				HttpURLConnection httpConnection = (HttpURLConnection) targetUrl.openConnection();
 				httpConnection.setDoOutput(true);
-				httpConnection.setRequestMethod("POST");
+				//Map map = httpConnection.getHeaderFields();
+				httpConnection.setRequestMethod("QUALITY");
 				httpConnection.setRequestProperty("Content-Type", "application/json");
-				httpConnection.addRequestProperty("method", "QUALITY");
 				httpConnection.setRequestProperty("Authorization", "Basic " + authStringEnc);
-
-				
 				
 				OutputStream outputStream = httpConnection.getOutputStream();
 				outputStream.write(inputJson.getBytes());
 				outputStream.flush();
 
 				if (httpConnection.getResponseCode() != 200) {
-					System.out.println("Response Code : "+httpConnection.getResponseMessage());
+					System.out.println("Response Code : "+httpConnection.getResponseCode());
+					System.out.println("\nResponse Message : "+httpConnection.getResponseMessage());
 				}
 
 				BufferedReader responseBuffer = new BufferedReader(new InputStreamReader(
@@ -146,5 +128,6 @@ public class InquireImageQualityClient {
 		System.out.println("getQualityWithoutUsingJersey Ends .. Output Json : "+outputJson);
 		
 		return outputJson;
-	}
+	}*/
+	
 }

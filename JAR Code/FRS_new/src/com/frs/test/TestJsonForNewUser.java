@@ -14,11 +14,12 @@ import com.frs.common.MDIProfileUtils;
  */
 public class TestJsonForNewUser {
 
-	public static void main2(String[] args){
+	public static void main(String[] args){
 		
 		// Testing getJsonForNewUser
 		
 		MDIProfileUtils mdiProfileUtils = new MDIProfileUtils();
+		MDIProfileHelper mdiProfileHelper = new MDIProfileHelper();
 		MDIRequestResponseBean requestResponseBean = new MDIRequestResponseBean();
 		MDIUser mdiUser = new MDIUser();
 
@@ -29,11 +30,14 @@ public class TestJsonForNewUser {
 		requestResponseBean.setUser(mdiUser);
 		String json = mdiProfileUtils.getJsonForNewUser(requestResponseBean);
 		
-		System.out.println("Json string is "+json);
+		// Testing the ENROLL Call
+		
+		mdiProfileHelper.newUser(json);
+		
 		
 	}
 	
-	public static void main(String[] args){
+	public static void main1(String[] args){
 		
 		// Testing processNewUser()
 		

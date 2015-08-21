@@ -3,11 +3,15 @@
  */
 package com.frs.persistUser;
 
-import com.sun.jersey.api.client.Client;
-import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.client.WebResource;
-import com.sun.jersey.api.client.config.ClientConfig;
-import com.sun.jersey.api.client.config.DefaultClientConfig;
+import java.net.URI;
+
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.core.MediaType;
+
+import org.glassfish.jersey.client.HttpUrlConnectorProvider;
+
 
 /**
  * @author Pavan
@@ -19,25 +23,16 @@ public class MDIPersistNewUserClient {
 
 		System.out.println("persistNewUser() method starts..");
 		
-		String newUserOutputJson = null;
-		String persistNewUserUrl = "https://demo.uis.accenture.com/MEVISV2.0/api/Biometric/ENROLL";
+		Client client = ClientBuilder.newClient();
+
+		client.property(HttpUrlConnectorProvider.SET_METHOD_WORKAROUND, true);
+		//String imageQualityOutputJson = client.target("https://demo.uis.accenture.com/MEVISV2.0/api/Biometric").request().header("Authorization", "Basic XGNsb3VkdXNlcjpEZW1vc3VpdGUyMDEzIyM=").method("quality",Entity.entity(inputJson, MediaType.APPLICATION_JSON), String.class);
 		
-		ClientConfig config = new DefaultClientConfig();
-		Client client = Client.create(config);
-		WebResource webResource = client.resource(persistNewUserUrl);
+		String imageQualityOutputJson = client.target(URI.create("https://demo.uis.accenture.com/RestProxyHybris/api/identity")).request().header("Authorization", "Basic XGNsb3VkdXNlcjpEZW1vc3VpdGUyMDEzIyM=").method("enroll", Entity.entity(inputJson, MediaType.APPLICATION_JSON), String.class);
 		
-//		ClientResponse response = webResource.accept("application/json").header("Authorization", "Basic XGNsb3VkdXNlcjpEZW1vc3VpdGUyMDEzIyM=").post(ClientResponse.class, inputJson);
-		ClientResponse response = webResource.accept("application/json").header("Authorization", "Basic XGNsb3VkdXNlcjpEZW1vc3VpdGUyMDEzIyM=").method("ENROLL", ClientResponse.class, inputJson);
+		System.out.println("Response : "+imageQualityOutputJson);
 		
-		if(response.getStatus() != 200){
-			System.out.println("Unable to Connect to the Server");
-		}
-		
-		newUserOutputJson = response.getEntity(String.class);
-		
-		System.out.println("persistNewUser() method ends ! Output Json is "+newUserOutputJson);
-		
-		return newUserOutputJson;
+		return imageQualityOutputJson;
 		
 	}
 

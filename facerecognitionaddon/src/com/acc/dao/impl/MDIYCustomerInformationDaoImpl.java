@@ -3,6 +3,7 @@
  */
 package com.acc.dao.impl;
 
+import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.internal.dao.DefaultGenericDao;
 import de.hybris.platform.servicelayer.search.FlexibleSearchQuery;
 import de.hybris.platform.servicelayer.search.SearchResult;
@@ -29,6 +30,14 @@ public class MDIYCustomerInformationDaoImpl extends DefaultGenericDao<ImageQuali
 		// YTODO Auto-generated constructor stub
 	}
 
+	public CustomerModel getCustomer(final String customerId)
+	{
+		final FlexibleSearchQuery query = new FlexibleSearchQuery("select {pk} from {customer} where {customerID} like '"
+				+ customerId + "%' OR {uid} like '" + customerId + "%'");
+		final SearchResult<CustomerModel> result = getFlexibleSearchService().search(query);
+		return CollectionUtils.isNotEmpty(result.getResult()) ? result.getResult().get(0) : null;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 *
@@ -37,10 +46,9 @@ public class MDIYCustomerInformationDaoImpl extends DefaultGenericDao<ImageQuali
 	@Override
 	public ImageQualityModel getCustomerImages(final String customerId)
 	{
-
-		final FlexibleSearchQuery query = new FlexibleSearchQuery(
-				"select {pk} from {ImageQuality} where {customer}=(select {pk} from {customer} where {customerId} like '"
-						+ customerId + "%')");
+		final CustomerModel customer = getCustomer(customerId);
+		final FlexibleSearchQuery query = new FlexibleSearchQuery("select {pk} from {ImageQuality} where {customer}='"
+				+ customer.getPk().toString() + "'");
 		final SearchResult<ImageQualityModel> result = getFlexibleSearchService().search(query);
 		return CollectionUtils.isNotEmpty(result.getResult()) ? result.getResult().get(0) : null;
 	}

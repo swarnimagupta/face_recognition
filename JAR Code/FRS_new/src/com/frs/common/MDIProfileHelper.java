@@ -19,10 +19,6 @@ import com.frs.imagequality.MDIApplicationImageQualityInterface;
 import com.frs.persistUser.MDIApplicationNewUserInterface;
 import com.frs.persistUser.MDIPersistNewUserClient;
 import com.frs.submitUser.MDIApplicationSubmitUserUtil;
-import com.frs.submitUser.MDIApplicationSubmitUserInterface;
-import com.frs.submitUser.MDIHybrisClass;
-import com.frs.submitUser.MDIHybrisInterface;
-import com.frs.submitUser.StatusData;
 
 /**
  * @author Pavan
@@ -90,12 +86,17 @@ public class MDIProfileHelper implements MDIApplicationImageQualityInterface, MD
 		System.out.println("newUser(). Method Starts. Input json : "+inputJson);
 		
 		MDIPersistNewUserClient client = new MDIPersistNewUserClient();
-		MDIRequestResponseBean requestResponseBean = null;
+		MDIRequestResponseBean requestResponseBean = new MDIRequestResponseBean();
+		MDIUser mdiUser = new MDIUser();
+		String biometricId;
 		
-		String outputJson = client.persistNewUser(inputJson);
-		requestResponseBean = processNewUser(outputJson);
+		biometricId = client.persistNewUser(inputJson);
 		
-		System.out.println("newUser. Method Ends... Bean returned is : "+requestResponseBean);	
+		mdiUser.setBiometricId(biometricId);
+		
+		requestResponseBean.setUser(mdiUser);
+		
+		System.out.println("newUser. Method Ends... Biometric User id is : "+requestResponseBean.getUser().biometricId);	
 		
 		return requestResponseBean;
 		
@@ -103,6 +104,8 @@ public class MDIProfileHelper implements MDIApplicationImageQualityInterface, MD
 
 	
 	/*
+	 * METHOD NOT NEEDED BECAUSE WE DONT GET JSON
+	 * 
 	 * This Method is used to parse the json from service 
 	 * and fill the objects with new user properties 
 	 * 
