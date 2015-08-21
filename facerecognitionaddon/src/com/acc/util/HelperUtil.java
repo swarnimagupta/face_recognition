@@ -32,15 +32,14 @@ public class HelperUtil
 		location.append(IMAGE2);
 		final String output = dateTime.toString().replace(":", "-");
 		location.append(SEPARATOR).append(output);
-		location.append(SEPARATOR).append(uid);
+		location.append(SEPARATOR).append(uid).append(SEPARATOR);
 		File g = new File(location.toString());
 		if (!g.exists())
 		{
 			boolean result = false;
 			try
 			{
-				g.mkdirs();
-				result = true;
+				result = g.mkdirs();
 			}
 			catch (final SecurityException se)
 			{
@@ -57,15 +56,14 @@ public class HelperUtil
 				location = new StringBuilder(HYBRIS_DATA);
 				location.append(IMAGE2);
 				location.append(SEPARATOR).append(output);
-				location.append(SEPARATOR).append(uid);
+				location.append(SEPARATOR).append(uid).append(SEPARATOR);
 				g = new File(location.toString());
 				if (!g.exists())
 				{
 					result = false;
 					try
 					{
-						g.mkdirs();
-						result = true;
+						result = g.mkdirs();
 					}
 					catch (final SecurityException se)
 					{
@@ -82,21 +80,6 @@ public class HelperUtil
 				}
 			}
 		}
-		//		else
-		//		{
-		//			//location.append(SEPARATOR).append(output);
-		//			final File f = new File(g);
-		//			LOG.info("datetime Directory is created!" + output + g.toString());
-		//			f.mkdir();
-		//			LOG.info("datetime Directory is created after f!" + f.toString());
-		//			if (f.exists())
-		//			{
-		//				location.append(SEPARATOR).append(uid);
-		//				final File e = new File(f + SEPARATOR + uid);
-		//				e.mkdir();
-		//				LOG.info("customerID folder is created after f!" + f.toString());
-		//			}
-		//		}
 		return location.toString();
 	}
 

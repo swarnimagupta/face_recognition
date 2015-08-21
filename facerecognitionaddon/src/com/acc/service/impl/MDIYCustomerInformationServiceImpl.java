@@ -3,6 +3,8 @@
  */
 package com.acc.service.impl;
 
+import java.util.List;
+
 import com.acc.dao.MDIYCustomerInformationDao;
 import com.acc.model.ImageQualityModel;
 import com.acc.service.MDIYCustomerInformationService;
@@ -18,7 +20,7 @@ public class MDIYCustomerInformationServiceImpl implements MDIYCustomerInformati
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see com.acc.service.MDIYCustomerInformationService#getCustomerImages(java.lang.String)
 	 */
 	@Override
@@ -34,5 +36,17 @@ public class MDIYCustomerInformationServiceImpl implements MDIYCustomerInformati
 	public void setmDIYCustomerInformationDao(final MDIYCustomerInformationDao mDIYCustomerInformationDao)
 	{
 		this.mDIYCustomerInformationDao = mDIYCustomerInformationDao;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.acc.service.MDIYCustomerInformationService#getImageQualities()
+	 */
+	@Override
+	public List<ImageQualityModel> getImageQualities()
+	{
+		// YTODO Auto-generated method stub
+		return mDIYCustomerInformationDao.getImageQualities();
 	}
 }

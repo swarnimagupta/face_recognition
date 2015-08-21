@@ -207,4 +207,19 @@
 		<property name="submitUserInterface" ref="submitUserInterface"/>
 		<property name="requestResponseBean" ref="requestResponseBean"/>
 	</bean>
+	
+	<bean id="mdiYConfigurationImpl" class="com.acc.configuration.MDIYConfigurationImpl">
+	</bean>
+	<bean id="mdiConfigurationUtils" class="com.frs.common.MDIConfigurationUtils" >
+        <constructor-arg index="0"><ref bean="mdiYConfigurationImpl"/></constructor-arg>
+	</bean>
+	
+	<bean id="persistCustomerImagesJob"
+			class="com.acc.job.PersistCustomerImagesJob"
+			parent="abstractJobPerformable">
+		<property name="mDIYCustomerInformationService" ref="mDIYCustomerInformationService"/>
+		<property name="modelService" ref="modelService"/>
+		<property name="mdiYImagesToStringConverter" ref="mdiYImagesToStringConverter"/>
+	</bean>
+	
 </beans>

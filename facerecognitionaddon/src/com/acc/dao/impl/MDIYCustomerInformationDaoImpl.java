@@ -8,6 +8,9 @@ import de.hybris.platform.servicelayer.internal.dao.DefaultGenericDao;
 import de.hybris.platform.servicelayer.search.FlexibleSearchQuery;
 import de.hybris.platform.servicelayer.search.SearchResult;
 
+import java.util.Collections;
+import java.util.List;
+
 import org.apache.commons.collections.CollectionUtils;
 
 import com.acc.dao.MDIYCustomerInformationDao;
@@ -48,9 +51,22 @@ public class MDIYCustomerInformationDaoImpl extends DefaultGenericDao<ImageQuali
 	{
 		final CustomerModel customer = getCustomer(customerId);
 		final FlexibleSearchQuery query = new FlexibleSearchQuery("select {pk} from {ImageQuality} where {customer}='"
-				+ customer.getPk().toString() + "'");
+				+ customer.getPk().getLongValueAsString() + "'");
 		final SearchResult<ImageQualityModel> result = getFlexibleSearchService().search(query);
 		return CollectionUtils.isNotEmpty(result.getResult()) ? result.getResult().get(0) : null;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see com.acc.dao.MDIYCustomerInformationDao#getImageQualities()
+	 */
+	@Override
+	public List<ImageQualityModel> getImageQualities()
+	{
+		final FlexibleSearchQuery query = new FlexibleSearchQuery("select {pk} from {ImageQuality} where {identityId}=''");
+		final SearchResult<ImageQualityModel> result = getFlexibleSearchService().search(query);
+		return CollectionUtils.isNotEmpty(result.getResult()) ? result.getResult() : Collections.EMPTY_LIST;
 	}
 
 }

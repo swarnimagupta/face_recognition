@@ -62,7 +62,7 @@
 								 optional="true"/>
 							<persistence type="property"></persistence>
 					</attribute>
-					<attribute type="java.lang.Integer" qualifier="identityId">
+					<attribute type="java.lang.String" qualifier="identityId">
 						<description>BiometricId</description>
 								<modifiers read="true" write="true" search="true" 
 							optional="true"/>
@@ -93,6 +93,9 @@
 							<persistence type="property"></persistence>
 					</attribute>
 				</attributes>
+		</itemtype>
+		
+		<itemtype code="PersistCustomerImagesCronJob" autocreate="true"	generate="true" extends="CronJob" jaloclass="com.acc.jalo.cronjob.PersistCustomerImagesCronJob">
 		</itemtype>
 	</itemtypes>
 
