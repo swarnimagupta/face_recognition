@@ -18,9 +18,11 @@ public interface MDIYSaveCustomerDataFacade
 	public void saveCustomerData(CustomerModel model);
 
 	/**
+	 *
 	 * @param imageInBase64
 	 * @param customerId
+	 * @param qualityScore
 	 * @return StatusData
 	 */
-	public StatusData saveCustomerImage(final String imageInBase64, final String customerId);
+	public StatusData saveCustomerImage(final String imageInBase64, final String customerId, final String qualityScore);
 }

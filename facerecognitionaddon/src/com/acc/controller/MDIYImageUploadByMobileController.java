@@ -33,6 +33,10 @@ import com.acc.util.WebservicesUtil;
 public class MDIYImageUploadByMobileController
 {
 
+	/**
+	 *
+	 */
+	private static final String QUALITY_SCORE = "qualityScore";
 	private static final Logger LOG = Logger.getLogger(MDIYImageUploadByMobileController.class);
 	private static final String CUSTOMERID = "customerId";
 	private static final String IMAGEINBASE64 = "imageInBase64";
@@ -56,7 +60,8 @@ public class MDIYImageUploadByMobileController
 			final JSONObject obj = (JSONObject) parser.parse(sbuf.toString());
 			final String customerId = String.valueOf(obj.get(CUSTOMERID));
 			final String imageInBase64 = String.valueOf(obj.get(IMAGEINBASE64));
-			return mDIYSaveCustomerDataFacade.saveCustomerImage(imageInBase64, customerId);
+			final String qualityScore = String.valueOf(obj.get(QUALITY_SCORE));
+			return mDIYSaveCustomerDataFacade.saveCustomerImage(imageInBase64, customerId, qualityScore);
 		}
 		return new StatusData();
 	}

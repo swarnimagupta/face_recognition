@@ -85,6 +85,9 @@
 		<property name="userService" ref="userService"/>
 		<property name="mdiySaveCustomerDataService" ref="mdiySaveCustomerDataService"/>
 		<property name="modelService" ref="modelService"/>
+		<property name="mediaService" ref="mediaService"/>
+		<property name="catalogVersionService" ref="catalogVersionService"/>
+		<property name="setupSyncJobService" ref="setupSyncJobService"/>
 	</bean>	
 
 	<!-- <bean id="profileHelper" class="ProfileHelper_path" > 
@@ -163,6 +166,7 @@
 	
 	<bean id="mDIYCustomerInformationFacade" class="com.acc.facade.impl.MDIYCustomerInformationFacadeImpl">
 		<property name="mDIYCustomerInformationService" ref="mDIYCustomerInformationService"/>
+		<property name="storeLoginDao" ref="storeLoginDao"/>
 	</bean>
 		
 	<bean id="mDIYCustomerInformationService" class="com.acc.service.impl.MDIYCustomerInformationServiceImpl">

@@ -19,7 +19,6 @@ public class HelperUtil
 
 	private static final String SEPARATOR = "/";
 	private static final String HYBRIS_DATA = "/hybris/data";
-	private static final String IMAGE2 = "/image";
 	private static final Logger LOG = Logger.getLogger(HelperUtil.class);
 
 	/**
@@ -27,13 +26,12 @@ public class HelperUtil
 	 */
 	public static String createDirectory(final String uid)
 	{
-		StringBuilder location = new StringBuilder("C:" + HYBRIS_DATA);
+		final StringBuilder location = new StringBuilder("./../../../../data/media/sys_master/images/face_recog_images");
 		final String dateTime = (new Date()).toString();
-		location.append(IMAGE2);
 		final String output = dateTime.toString().replace(":", "-");
 		location.append(SEPARATOR).append(output);
 		location.append(SEPARATOR).append(uid).append(SEPARATOR);
-		File g = new File(location.toString());
+		final File g = new File(location.toString());
 		if (!g.exists())
 		{
 			boolean result = false;
@@ -52,32 +50,6 @@ public class HelperUtil
 			else
 			{
 				LOG.info("Failed to create directory!" + dateTime.toString());
-				//creating for linux or mac
-				location = new StringBuilder(HYBRIS_DATA);
-				location.append(IMAGE2);
-				location.append(SEPARATOR).append(output);
-				location.append(SEPARATOR).append(uid).append(SEPARATOR);
-				g = new File(location.toString());
-				if (!g.exists())
-				{
-					result = false;
-					try
-					{
-						result = g.mkdirs();
-					}
-					catch (final SecurityException se)
-					{
-						LOG.error("could not create directory", se);
-					}
-					if (result)
-					{
-						LOG.info("image Directory is created!" + dateTime.toString());
-					}
-					else
-					{
-						LOG.info("Failed to create directory!" + dateTime.toString());
-					}
-				}
 			}
 		}
 		return location.toString();

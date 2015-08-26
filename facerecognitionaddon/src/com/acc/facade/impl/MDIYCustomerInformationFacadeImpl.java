@@ -3,13 +3,19 @@
  */
 package com.acc.facade.impl;
 
+import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.dto.converter.Converter;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.collections.CollectionUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.acc.dao.StoreLoginDao;
 import com.acc.data.ImageData;
 import com.acc.facade.MDIYCustomerInformationFacade;
 import com.acc.model.ImageQualityModel;
@@ -24,6 +30,8 @@ public class MDIYCustomerInformationFacadeImpl implements MDIYCustomerInformatio
 {
 
 	private MDIYCustomerInformationService mDIYCustomerInformationService;
+	@Autowired
+	private StoreLoginDao storeLoginDao;
 
 	@Resource(name = "mdiYImagesToStringConverter")
 	private Converter<ImageQualityModel, String> mdiYImagesToStringConverter;
@@ -36,12 +44,15 @@ public class MDIYCustomerInformationFacadeImpl implements MDIYCustomerInformatio
 	@Override
 	public void getCustomerImages(final String customerId, final ImageData imageData)
 	{
-		final ImageQualityModel image = mDIYCustomerInformationService.getCustomerImages(customerId);
+		final CustomerModel model = storeLoginDao.isCustomerFound(customerId);
+		final Collection<ImageQualityModel> qualityModels = model.getImageQuality();
+		//final ImageQualityModel image = mDIYCustomerInformationService.getCustomerImages(customerId);
 		final List<String> imagesList = new ArrayList<String>();
-		if (null != image)
+		if (CollectionUtils.isNotEmpty(qualityModels))
 		{
-			imagesList.add(image.getImagePath());
+			imagesList.add(qualityModels.iterator().next().getImagePath());
 		}
+		imageData.setImagesList(imagesList);
 	}
 
 	/**
@@ -52,4 +63,15 @@ public class MDIYCustomerInformationFacadeImpl implements MDIYCustomerInformatio
 	{
 		this.mDIYCustomerInformationService = mDIYCustomerInformationService;
 	}
+
+	/**
+	 * @param storeLoginDao
+	 *           the storeLoginDao to set
+	 */
+	public void setStoreLoginDao(final StoreLoginDao storeLoginDao)
+	{
+		this.storeLoginDao = storeLoginDao;
+	}
+
+
 }
