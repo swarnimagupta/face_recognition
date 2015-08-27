@@ -24,7 +24,7 @@ public class MDIYCustomerToCSRCustomerPopulator implements Populator<CustomerMod
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see de.hybris.platform.converters.Populator#populate(java.lang.Object, java.lang.Object)
 	 */
 	@Override
@@ -37,6 +37,7 @@ public class MDIYCustomerToCSRCustomerPopulator implements Populator<CustomerMod
 		{ "creationtime", "loginTime", "pk" };
 		BeanUtils.copyProperties(source, target, ignoreProperties);
 		target.setLoginTime(new Date());
+		target.setCustomerId(source.getCustomerID());
 		target.setPointOfService("Chiba");
 	}
 

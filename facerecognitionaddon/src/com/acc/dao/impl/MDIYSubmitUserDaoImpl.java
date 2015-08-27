@@ -24,14 +24,14 @@ public class MDIYSubmitUserDaoImpl implements MDIYSubmitUserDao
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see com.acc.dao.MDIYSubmitUserDao#doesCustomerExist(java.lang.String)
 	 */
 	@Override
 	public CustomerModel doesCustomerExist(final String identityId)
 	{
 		final FlexibleSearchQuery flexibleQuery = new FlexibleSearchQuery("select {customer} from {ImageQuality} "
-				+ "where {identityId}=\"" + identityId + "\"");
+				+ "where {identityId}='" + identityId + "'");
 		try
 		{
 			final SearchResult<CustomerModel> result = flexibleSearchService.search(flexibleQuery);

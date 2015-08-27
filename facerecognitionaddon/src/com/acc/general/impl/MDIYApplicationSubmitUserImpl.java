@@ -46,7 +46,7 @@ public class MDIYApplicationSubmitUserImpl implements MDIApplicationSubmitUserIn
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * com.frs.submitUser.MDIApplicationSubmitUserInterface#notifyAgentForNewUser(com.frs.bean.MDIRequestResponseBean)
 	 */
@@ -69,7 +69,7 @@ public class MDIYApplicationSubmitUserImpl implements MDIApplicationSubmitUserIn
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * com.frs.submitUser.MDIApplicationSubmitUserInterface#notifyAgentForRegisteredUser(com.frs.bean.MDIRequestResponseBean
 	 * )
@@ -77,7 +77,7 @@ public class MDIYApplicationSubmitUserImpl implements MDIApplicationSubmitUserIn
 	@Override
 	public StatusData notifyAgentForRegisteredUser(final MDIRequestResponseBean bean)
 	{
-		LOG.info("notifyAgentForNewUser");
+		LOG.info("notifyAgentForRegisteredUser");
 		final MDIUser user = bean.getUser();
 		final StatusData statusData = new StatusData();
 		final CustomerModel customer = mdiYSubmitUserService.doesCustomerExist(user.getBiometricId());
