@@ -8,6 +8,7 @@ import de.hybris.platform.servicelayer.dto.converter.Converter;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -38,7 +39,7 @@ public class MDIYCustomerInformationFacadeImpl implements MDIYCustomerInformatio
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see com.acc.facade.MDIYCustomerInformation#getCustomerImages(java.lang.String, com.acc.data.ImageData)
 	 */
 	@Override
@@ -46,11 +47,17 @@ public class MDIYCustomerInformationFacadeImpl implements MDIYCustomerInformatio
 	{
 		final CustomerModel model = storeLoginDao.isCustomerFound(customerId);
 		final Collection<ImageQualityModel> qualityModels = model.getImageQuality();
-		//final ImageQualityModel image = mDIYCustomerInformationService.getCustomerImages(customerId);
 		final List<String> imagesList = new ArrayList<String>();
 		if (CollectionUtils.isNotEmpty(qualityModels))
 		{
-			imagesList.add(qualityModels.iterator().next().getImagePath());
+			String imagePath = null;
+			final Iterator<ImageQualityModel> iterator = qualityModels.iterator();
+			while (iterator.hasNext())
+			{
+				imagePath = iterator.next().getImagePath();
+				continue;
+			}
+			imagesList.add(imagePath);
 		}
 		imageData.setImagesList(imagesList);
 	}

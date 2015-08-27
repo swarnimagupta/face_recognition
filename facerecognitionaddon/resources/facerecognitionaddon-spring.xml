@@ -226,4 +226,9 @@
 		<property name="mdiYImagesToStringConverter" ref="mdiYImagesToStringConverter"/>
 	</bean>
 	
+	<bean id="faceRecognitionRenderer"
+          class="com.acc.component.renderer.FaceRecognitionRenderer">
+          <property name="typeService" ref="typeService" />
+          <property name="uiExperienceService" ref="defaultUiExperienceService" />
+	</bean>
 </beans>

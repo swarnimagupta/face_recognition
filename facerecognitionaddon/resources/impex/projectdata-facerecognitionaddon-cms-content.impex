@@ -4,9 +4,6 @@ $contentCatalogName=Electronics Content Catalog
 $page=page(uid, $contentCV)                        ;
 $contentPage=contentPage(uid, $contentCV)          ;
 
-INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false'];
-;;facerecognitionpage;facerecognition Page;AccountPageTemplate;facerecognitionpage
-
 
 ########### Component #############
 INSERT_UPDATE FaceRecognitionComponent;catalogVersion(catalog(id),version)[unique=true,allownull=true];name;onlyOneRestrictionMustApply[allownull=true];uid[unique=true,allownull=true];visible[allownull=true]
@@ -16,11 +13,11 @@ INSERT_UPDATE FaceRecognitionComponent;catalogVersion(catalog(id),version)[uniqu
 ######facerecognition component display on Order Confirmation Page#######
 #for desktop
 # Order Confirmation Page Template
-INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='OrderConfirmationPageTemplate'];validComponentTypes(code);compTypeGroup(code)
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='AccountPageTemplate'];validComponentTypes(code);compTypeGroup(code)
 ;TopContent;;FaceRecognitionComponent;wide
 
 insert_update ContentSlot;active[allownull=true];catalogVersion(catalog(id),version)[unique=true,allownull=true];name;uid[unique=true,allownull=true];cmsComponents(uid[unique=true,allownull=true],$contentCV)
 ;true;electronicsContentCatalog:Staged;FaceRecognitionSlots;FaceRecognitionSlots;FaceRecognitionComponent
 
 insert_update ContentSlotForPage;catalogVersion(catalog(id),version)[unique=true,allownull=true];contentSlot(catalogVersion(catalog(id),version),uid)[allownull=true];page(catalogVersion(catalog(id),version),uid)[allownull=true];position[allownull=true];uid[unique=true,allownull=true]
-;electronicsContentCatalog:Staged;electronicsContentCatalog:Staged:FaceRecognitionSlots;electronicsContentCatalog:Staged:facerecognitionpage;TopContent;FaceRecognitionCFP
+;electronicsContentCatalog:Staged;electronicsContentCatalog:Staged:FaceRecognitionSlots;electronicsContentCatalog:Staged:profile;TopContent;FaceRecognitionCFP

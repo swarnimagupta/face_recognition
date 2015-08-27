@@ -3,7 +3,6 @@
  */
 package com.acc.form;
 
-import org.springframework.web.multipart.MultipartFile;
 
 
 /**
@@ -13,15 +12,8 @@ import org.springframework.web.multipart.MultipartFile;
 public class UploadedFile
 {
 
-	private MultipartFile file;
-
-	public MultipartFile getFile()
-	{
-		return file;
-	}
-
-	public void setFile(final MultipartFile file)
-	{
-		this.file = file;
-	}
+	public int length;
+	public byte[] bytes;
+	public String name;
+	public String type;
 }

@@ -24,5 +24,13 @@ public interface FcControllerConstants
 			}
 
 		}
+		
+		interface Fragments
+		{
+			interface Facerecog
+			{
+				String ajaxuploadImage = "pages/addon:/facerecognitionaddon/fragments/facerecog/ajaxuploadImage";
+			}
+		}
 	}
 }
