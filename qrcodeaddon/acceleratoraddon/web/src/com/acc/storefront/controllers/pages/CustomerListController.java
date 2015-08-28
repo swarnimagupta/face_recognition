@@ -161,8 +161,30 @@ public class CustomerListController extends AbstractAddOnPageController
 		if (null != request.getParameter("customerPK"))
 		{
 			final CSRCustomerDetailsModel csrCustomerDetailsModel = modelService.get(PK.parse(request.getParameter("customerPK")));
-			assistCustomerRecord(csrCustomerDetailsModel, storecustomerData, informationDto, customerOrderDataList, model);
-			getGeoLocationNClimateData(csrCustomerDetailsModel.getCustomerId(), model);
+			if(StringUtils.isNotEmpty(csrCustomerDetailsModel.getCustomerName()))
+			{
+				assistCustomerRecord(csrCustomerDetailsModel, storecustomerData, informationDto, customerOrderDataList, model);
+				getGeoLocationNClimateData(csrCustomerDetailsModel.getCustomerId(), model);
+			}
+			else
+			{
+				final String time = returnLoginFromTime(csrCustomerDetailsModel.getLoginTime());
+				final String loggedTime = returnLoggedInTime(csrCustomerDetailsModel.getLoginTime());
+				storecustomerData.setCustomerId(csrCustomerDetailsModel.getCustomerId());
+				storecustomerData.setCustomerName(csrCustomerDetailsModel.getCustomerName());
+				storecustomerData.setStoreCustomerPK(csrCustomerDetailsModel.getPk().getLongValueAsString());
+				storecustomerData.setWaitingTime(time);
+				storecustomerData.setLoginTime(loggedTime);
+				storecustomerData.setProfilePictureURL(csrCustomerDetailsModel.getImageUrl());
+				storecustomerData
+						.setProcessedBy((null == csrCustomerDetailsModel.getProcessedBy() ? "" : csrCustomerDetailsModel.getProcessedBy()));
+				storecustomerData.setAge(csrCustomerDetailsModel.getAge());
+				if(null!=csrCustomerDetailsModel.getComplexion())
+				{
+					storecustomerData.setComplexion(csrCustomerDetailsModel.getComplexion().toString());
+				}
+				storecustomerData.setGender(csrCustomerDetailsModel.getGender());
+			}
 		}
 		model.addAttribute("storecustomerData", storecustomerData);
 		model.addAttribute("informationDto", informationDto);
@@ -315,23 +337,39 @@ public class CustomerListController extends AbstractAddOnPageController
 			{
 				for (final CSRCustomerDetailsModel customerDetails : csrCustomerDetailsByStatusList)
 				{
-					final UserModel userModel = userService.getUserForUID(customerDetails.getCustomerId());
+					LOG.info("customer detailssssssss--->customerDetails.getAge()-->"+customerDetails.getAge());
+					LOG.info("customer detailssssssss--->customerDetails.getCustomerId()-->"+customerDetails.getCustomerId());
+					LOG.info("customer detailssssssss--->customerDetails.getUUID()-->"+customerDetails.getUUID());
 					String profilePictureURL = "";
-					if (null != userModel && userModel instanceof CustomerModel)
+					if(StringUtils.isNotEmpty(customerDetails.getUUID()))
 					{
-						final CustomerModel customerModel = (CustomerModel) userModel;
-						profilePictureURL = (null == customerModel.getProfilePicture() ? StringUtils.EMPTY : customerModel
-								.getProfilePicture().getURL2());
-						if(StringUtils.isEmpty(profilePictureURL) && CollectionUtils.isNotEmpty(customerModel.getImageQuality()))
+						final UserModel userModel = userService.getUserForUID(customerDetails.getCustomerId());
+						LOG.info("userModel-->"+userModel);
+						if (null != userModel && userModel instanceof CustomerModel)
 						{
-							profilePictureURL = request.getContextPath() + customerModel.getImageQuality().iterator().next().getImagePath();
+							final CustomerModel customerModel = (CustomerModel) userModel;
+							profilePictureURL = (null == customerModel.getProfilePicture() ? StringUtils.EMPTY : customerModel
+									.getProfilePicture().getURL2());
+							if(StringUtils.isEmpty(profilePictureURL) && CollectionUtils.isNotEmpty(customerModel.getImageQuality()))
+							{
+								profilePictureURL = customerModel.getImageQuality().iterator().next().getImagePath();
+							}
+							
 						}
 					}
+					else
+					{
+						profilePictureURL = customerDetails.getImageUrl();
+					}
+					LOG.info("profilePictureURL-->"+profilePictureURL);
 					final StoreCustomerData storecustomerData = new StoreCustomerData();
 					final String time = returnLoginFromTime(customerDetails.getLoginTime());
+					LOG.info("time-->"+time);
 					final String loggedTime = returnLoggedInTime(customerDetails.getLoginTime());
+					LOG.info("loggedTime-->"+loggedTime);
 					storecustomerData.setCustomerId(customerDetails.getCustomerId());
 					storecustomerData.setCustomerName(customerDetails.getCustomerName());
+					LOG.info("customerDetails.getCustomerName()-->"+customerDetails.getCustomerName());
 					storecustomerData.setStoreCustomerPK(customerDetails.getPk().getLongValueAsString());
 					storecustomerData.setWaitingTime(time);
 					storecustomerData.setLoginTime(loggedTime);
@@ -339,8 +377,12 @@ public class CustomerListController extends AbstractAddOnPageController
 					storecustomerData
 							.setProcessedBy((null == customerDetails.getProcessedBy() ? "" : customerDetails.getProcessedBy()));
 					storecustomerData.setAge(customerDetails.getAge());
-					storecustomerData.setComplexion(customerDetails.getComplexion().toString());
+					if(null!=customerDetails.getComplexion())
+					{
+						storecustomerData.setComplexion(customerDetails.getComplexion().toString());
+					}
 					storecustomerData.setGender(customerDetails.getGender());
+					LOG.info("customerDetails.getGender()-->"+customerDetails.getGender());
 					customerStatusDataList.add(storecustomerData);
 				}
 			}
@@ -378,13 +420,24 @@ public class CustomerListController extends AbstractAddOnPageController
 			{
 				for (final CSRCustomerDetailsModel customerDetails : csrCustomerDetailsByStatusList)
 				{
-					final UserModel userModel = userService.getUserForUID(customerDetails.getCustomerId());
 					String profilePictureURL = "";
-					if (null != userModel && userModel instanceof CustomerModel)
+					if(StringUtils.isNotEmpty(customerDetails.getUUID()))
 					{
-						final CustomerModel customerModel = (CustomerModel) userModel;
-						profilePictureURL = (null == customerModel.getProfilePicture() ? StringUtils.EMPTY : customerModel
-								.getProfilePicture().getURL2());
+						final UserModel userModel = userService.getUserForUID(customerDetails.getCustomerId());
+						if (null != userModel && userModel instanceof CustomerModel)
+						{
+							final CustomerModel customerModel = (CustomerModel) userModel;
+							profilePictureURL = (null == customerModel.getProfilePicture() ? StringUtils.EMPTY : customerModel
+									.getProfilePicture().getURL2());
+							if(StringUtils.isEmpty(profilePictureURL) && CollectionUtils.isNotEmpty(customerModel.getImageQuality()))
+							{
+								profilePictureURL = customerModel.getImageQuality().iterator().next().getImagePath();
+							}
+						}
+					}
+					else
+					{
+						profilePictureURL = customerDetails.getImageUrl();
 					}
 					final StoreCustomerData storecustomerData = new StoreCustomerData();
 					final String time = returnLoginFromTime(customerDetails.getLoginTime());
@@ -397,6 +450,12 @@ public class CustomerListController extends AbstractAddOnPageController
 					storecustomerData.setProfilePictureURL(profilePictureURL);
 					storecustomerData
 							.setProcessedBy((null == customerDetails.getProcessedBy() ? "" : customerDetails.getProcessedBy()));
+					storecustomerData.setAge(customerDetails.getAge());
+					if(null!=customerDetails.getComplexion())
+					{
+						storecustomerData.setComplexion(customerDetails.getComplexion().toString());
+					}
+					storecustomerData.setGender(customerDetails.getGender());
 					customerStatusDataList.add(storecustomerData);
 				}
 			}
@@ -433,13 +492,24 @@ public class CustomerListController extends AbstractAddOnPageController
 			{
 				for (final CSRCustomerDetailsModel customerDetails : csrCustomerDetailsByStatusList)
 				{
-					final UserModel userModel = userService.getUserForUID(customerDetails.getCustomerId());
 					String profilePictureURL = "";
-					if (null != userModel && userModel instanceof CustomerModel)
+					if(StringUtils.isNotEmpty(customerDetails.getUUID()))
 					{
-						final CustomerModel customerModel = (CustomerModel) userModel;
-						profilePictureURL = (null == customerModel.getProfilePicture() ? StringUtils.EMPTY : customerModel
-								.getProfilePicture().getURL2());
+						final UserModel userModel = userService.getUserForUID(customerDetails.getCustomerId());
+						if (null != userModel && userModel instanceof CustomerModel)
+						{
+							final CustomerModel customerModel = (CustomerModel) userModel;
+							profilePictureURL = (null == customerModel.getProfilePicture() ? StringUtils.EMPTY : customerModel
+									.getProfilePicture().getURL2());
+							if(StringUtils.isEmpty(profilePictureURL) && CollectionUtils.isNotEmpty(customerModel.getImageQuality()))
+							{
+								profilePictureURL = customerModel.getImageQuality().iterator().next().getImagePath();
+							}
+						}
+					}
+					else
+					{
+						profilePictureURL = customerDetails.getImageUrl();
 					}
 					final StoreCustomerData storecustomerData = new StoreCustomerData();
 					final String time = returnLoginFromTime(customerDetails.getLoginTime());
@@ -452,6 +522,12 @@ public class CustomerListController extends AbstractAddOnPageController
 					storecustomerData.setProfilePictureURL(profilePictureURL);
 					storecustomerData
 							.setProcessedBy((null == customerDetails.getProcessedBy() ? "" : customerDetails.getProcessedBy()));
+					storecustomerData.setAge(customerDetails.getAge());
+					if(null!=customerDetails.getComplexion())
+					{
+						storecustomerData.setComplexion(customerDetails.getComplexion().toString());
+					}
+					storecustomerData.setGender(customerDetails.getGender());
 					customerStatusDataList.add(storecustomerData);
 				}
 			}
@@ -555,7 +631,7 @@ public class CustomerListController extends AbstractAddOnPageController
 			final HttpServletRequest request, final HttpServletResponse response) throws CMSItemNotFoundException
 
 	{
-		final List<CSRCustomerDetailsData> csrCustomerDetailsData = StoreCustomerFacade.getCollectOrderByCustomerName(customerName);
+		final List<CSRCustomerDetailsData> csrCustomerDetailsData = StoreCustomerFacade.getCollectOrderByCustomerName(customerName, request);
 		if (null != csrCustomerDetailsData)
 		{
 			LOG.info("customer data in csutomer list controller" + csrCustomerDetailsData);
@@ -576,10 +652,10 @@ public class CustomerListController extends AbstractAddOnPageController
 
 	{
 		final List<CSRCustomerDetailsData> csrCustomerDataList = StoreCustomerFacade.getCustomerDetailsByDateAndTime(fromDate,
-				toDate, fromTime, toTime);
+				toDate, fromTime, toTime, request);
 		model.addAttribute("csrCustomerDataList", csrCustomerDataList);
 		model.addAttribute("CSRCustomerDetailsData", CollectionUtils.isEmpty(csrCustomerDataList) ? new CSRCustomerDetailsData()
-				: StoreCustomerFacade.getCollectOrderByCustomerName(csrCustomerDataList.get(0).getCustomerName()));
+				: StoreCustomerFacade.getCollectOrderByCustomerName(csrCustomerDataList.get(0).getCustomerName(), request));
 		return ControllerConstants.Views.Fragments.Cart.CustomerByDateTime;
 	}
 

@@ -34,7 +34,10 @@
 		<property name="UUID" type="String"/>
 		<property name="processedBy" type="String"/>
 		<property name="pointOfService" type="String"/>
-		<property name="profilePictureURL" type="String"/>		
+		<property name="profilePictureURL" type="String"/>
+		<property name="gender" type="String"/>
+		<property name="complexion" type="String"/>
+		<property name="age" type="String"/>	
 	</bean> 
 
 	<bean class="com.acc.facades.wishlist.data.WishlistData">

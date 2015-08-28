@@ -68,7 +68,7 @@
 								<c:set var="imageUrl"
 									value="${commonResourcePath}/../../addons/qrcodeaddon/desktop/common/bnc_images/personal_photos/person1.jpg" />
 							</c:if>
-							<img src="${imageUrl}" class="fl img-width" /> <span class="tabt">${storecustomerData.customerName}</span>
+							<img src="${imageUrl}" class="fl img-width" style="width: 155px;"/> <span class="tabt">${storecustomerData.customerName}</span>
 						</div>
 						<div class="oh pdtb20">
 							<c:choose>
@@ -94,6 +94,18 @@
 
 						<div class="oh pdtb20">
 							<span class="fl lftt">UID:</span> <span class="fl rgtt">${storecustomerData.customerId}
+							</span>
+						</div>
+						<div class="oh pdtb20">
+							<span class="fl lftt">Gender:</span> <span class="fl rgtt">${storecustomerData.gender}
+							</span>
+						</div>
+						<div class="oh pdtb20">
+							<span class="fl lftt">Age:</span> <span class="fl rgtt">${storecustomerData.age}
+							</span>
+						</div>
+						<div class="oh pdtb20">
+							<span class="fl lftt">Complexion:</span> <span class="fl rgtt">${storecustomerData.complexion}
 							</span>
 						</div>
 						<%-- <div class="oh pdtb20">

@@ -5,6 +5,8 @@ package com.acc.facades.storecustomer;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import com.acc.enums.CSRStoreStatus;
 import com.acc.facades.CSRCustomerDetails.data.CSRCustomerDetailsData;
 import com.acc.model.CSRCustomerDetailsModel;
@@ -36,9 +38,9 @@ public interface StoreCustomerFacade
 	 */
 	public List<CSRCustomerDetailsModel> getCSRCustomerDetailsByStatus(CSRStoreStatus status);
 
-	public List<CSRCustomerDetailsData> getCollectOrderByCustomerName(String customerName);
+	public List<CSRCustomerDetailsData> getCollectOrderByCustomerName(String customerName, HttpServletRequest request);
 
 	public List<CSRCustomerDetailsData> getCustomerDetailsByDateAndTime(final String fromDate, final String toDate,
-			final String fromTime, final String toTime);
+			final String fromTime, final String toTime, HttpServletRequest request);
 
 }

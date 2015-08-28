@@ -6,6 +6,8 @@ package com.acc.populator;
 import de.hybris.platform.converters.Populator;
 import de.hybris.platform.servicelayer.dto.converter.ConversionException;
 
+import java.util.Date;
+
 import org.springframework.util.Assert;
 
 import com.acc.enums.CSRStoreStatus;
@@ -35,6 +37,7 @@ public class MDIYCSRCustomerPopulator implements Populator<MDIUser, CSRCustomerD
 		target.setCustomerName(source.getUserName());
 		target.setPointOfService("Chiba");
 		target.setStatus(CSRStoreStatus.LOGGEDIN);
+		target.setLoginTime(new Date());
 		target.setAge(String.valueOf(source.getAge()));
 		target.setGender(source.getGender());
 		if (Complexion.BLACK.toString().equals(source.getComplexion()))

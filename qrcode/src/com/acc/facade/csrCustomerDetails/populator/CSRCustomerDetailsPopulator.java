@@ -46,7 +46,7 @@ public class CSRCustomerDetailsPopulator implements Populator<CSRCustomerDetails
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see de.hybris.platform.converters.Populator#populate(java.lang.Object, java.lang.Object)
 	 */
 	@Override
@@ -69,6 +69,10 @@ public class CSRCustomerDetailsPopulator implements Populator<CSRCustomerDetails
 				target.setProfilePictureURL((null == customerModel.getProfilePicture() ? StringUtils.EMPTY : customerModel
 						.getProfilePicture().getURL2()));
 			}
+
+			target.setAge(source.getAge());
+			target.setComplexion(source.getComplexion().toString());
+			target.setGender(source.getGender());
 
 		}
 

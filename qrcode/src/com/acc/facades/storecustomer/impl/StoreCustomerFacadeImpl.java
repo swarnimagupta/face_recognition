@@ -9,8 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -93,15 +95,22 @@ public class StoreCustomerFacadeImpl implements StoreCustomerFacade
 	}
 
 
-	private List<CSRCustomerDetailsData> convert(final List<CSRCustomerDetailsModel> CSRCustomerDetailsList)
+	private List<CSRCustomerDetailsData> convert(final List<CSRCustomerDetailsModel> CSRCustomerDetailsList,
+			final HttpServletRequest request)
 	{
 		final List<CSRCustomerDetailsData> CSRCustomerDetailsData = new ArrayList<CSRCustomerDetailsData>();
 
 		if (CollectionUtils.isNotEmpty(CSRCustomerDetailsList))
 		{
+			CSRCustomerDetailsData cSRCustomerDetailsData = null;
 			for (final CSRCustomerDetailsModel customerDetailsModel : CSRCustomerDetailsList)
 			{
-				CSRCustomerDetailsData.add(csrCustomerDetailsConverter.convert(customerDetailsModel));
+				cSRCustomerDetailsData = csrCustomerDetailsConverter.convert(customerDetailsModel);
+				if (StringUtils.isEmpty(cSRCustomerDetailsData.getProfilePictureURL()))
+				{
+					cSRCustomerDetailsData.setProfilePictureURL(customerDetailsModel.getImageUrl());
+				}
+				CSRCustomerDetailsData.add(cSRCustomerDetailsData);
 
 			}
 		}
@@ -114,10 +123,10 @@ public class StoreCustomerFacadeImpl implements StoreCustomerFacade
 	 * @see com.acc.core.collectorder.facade.CustomerCollectOrderFacade#getCollectOrderByCustomerName(java.lang.String)
 	 */
 	@Override
-	public List<CSRCustomerDetailsData> getCollectOrderByCustomerName(final String customerName)
+	public List<CSRCustomerDetailsData> getCollectOrderByCustomerName(final String customerName, final HttpServletRequest request)
 	{
 		final List<CSRCustomerDetailsModel> CSRCustomerDetails = storeCustomerService.getCollectOrderByCustomerName(customerName);
-		return convert(CSRCustomerDetails);
+		return convert(CSRCustomerDetails, request);
 	}
 
 	/*
@@ -128,9 +137,9 @@ public class StoreCustomerFacadeImpl implements StoreCustomerFacade
 	 */
 	@Override
 	public List<CSRCustomerDetailsData> getCustomerDetailsByDateAndTime(final String fromDate, final String toDate,
-			final String fromTime, final String toTime)
+			final String fromTime, final String toTime, final HttpServletRequest request)
 	{
-		return convert(storeCustomerService.getCustomerDetailsByDateAndTime(fromDate, toDate, fromTime, toTime));
+		return convert(storeCustomerService.getCustomerDetailsByDateAndTime(fromDate, toDate, fromTime, toTime), request);
 	}
 
 }
