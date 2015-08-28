@@ -83,4 +83,16 @@
 	      extends="de.hybris.platform.commercefacades.order.data.AbstractOrderData">
 		<property name="ucoid" type="String"/>
 	</bean>
+	
+	
+	<bean class="com.acc.storefront.util.StoreCustomerData">
+		<property name="customerName" type="String"/>
+		<property name="custStatus" type="String"/>
+		<property name="processedBy" type="String"/>
+		<property name="loginTime" type="String"/>
+		<property name="customerId" type="String"/>
+		<property name="storeCustomerPK" type="String"/>
+		<property name="waitingTime" type="String"/>
+		<property name="profilePictureURL" type="String"/>
+	</bean>
 </beans>

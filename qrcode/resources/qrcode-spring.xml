@@ -120,13 +120,13 @@
 	<bean id="csrCustomerDetailsData" class="com.acc.facades.CSRCustomerDetails.data.CSRCustomerDetailsData" scope="prototype"/>
 	
 	<bean id="csrCustomerDetailsConverter" parent="abstractPopulatingConverter">
-	<lookup-method name="createTarget" bean="csrCustomerDetailsData"/>
-	<property name="populators">
-		<list>
-			<ref bean="csrCustomerDetailsPopulator" />
-		</list>
-	</property>
-</bean>
+		<lookup-method name="createTarget" bean="csrCustomerDetailsData"/>
+		<property name="populators">
+			<list>
+				<ref bean="csrCustomerDetailsPopulator" />
+			</list>
+		</property>
+	</bean>
 	
 	
 	

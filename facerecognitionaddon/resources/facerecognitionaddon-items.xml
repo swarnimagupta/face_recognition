@@ -92,6 +92,16 @@
 							<modifiers read="true" write="true" search="true" optional="true"/>
 							<persistence type="property"></persistence>
 					</attribute>
+					<attribute type="java.lang.String" qualifier="age">
+						<description>Customer's Age</description>
+							<modifiers read="true" write="true" search="true" optional="true"/>
+							<persistence type="property"></persistence>
+					</attribute>
+					<attribute type="java.lang.String" qualifier="gender">
+						<description>Customer's Gender</description>
+							<modifiers read="true" write="true" search="true" optional="true"/>
+							<persistence type="property"></persistence>
+					</attribute>
 				</attributes>
 		</itemtype>
 		

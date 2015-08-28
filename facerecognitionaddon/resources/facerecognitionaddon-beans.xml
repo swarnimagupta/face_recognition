@@ -48,4 +48,10 @@
 	<bean class="com.acc.data.ImageData">
 		<property name="imagesList" type="java.util.List&lt;java.lang.String>"/>
 	</bean>
+	
+	<bean class="com.acc.storefront.util.StoreCustomerData">
+		<property name="gender" type="String"/>
+		<property name="complexion" type="String"/>
+		<property name="age" type="String"/>
+	</bean>
 </beans>

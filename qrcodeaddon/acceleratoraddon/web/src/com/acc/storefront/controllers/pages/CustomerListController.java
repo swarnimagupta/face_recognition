@@ -322,6 +322,10 @@ public class CustomerListController extends AbstractAddOnPageController
 						final CustomerModel customerModel = (CustomerModel) userModel;
 						profilePictureURL = (null == customerModel.getProfilePicture() ? StringUtils.EMPTY : customerModel
 								.getProfilePicture().getURL2());
+						if(StringUtils.isEmpty(profilePictureURL) && CollectionUtils.isNotEmpty(customerModel.getImageQuality()))
+						{
+							profilePictureURL = request.getContextPath() + customerModel.getImageQuality().iterator().next().getImagePath();
+						}
 					}
 					final StoreCustomerData storecustomerData = new StoreCustomerData();
 					final String time = returnLoginFromTime(customerDetails.getLoginTime());
@@ -334,6 +338,9 @@ public class CustomerListController extends AbstractAddOnPageController
 					storecustomerData.setProfilePictureURL(profilePictureURL);
 					storecustomerData
 							.setProcessedBy((null == customerDetails.getProcessedBy() ? "" : customerDetails.getProcessedBy()));
+					storecustomerData.setAge(customerDetails.getAge());
+					storecustomerData.setComplexion(customerDetails.getComplexion().toString());
+					storecustomerData.setGender(customerDetails.getGender());
 					customerStatusDataList.add(storecustomerData);
 				}
 			}

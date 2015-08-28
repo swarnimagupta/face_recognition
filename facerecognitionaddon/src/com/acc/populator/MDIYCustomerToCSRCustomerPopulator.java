@@ -9,9 +9,11 @@ import de.hybris.platform.servicelayer.dto.converter.ConversionException;
 
 import java.util.Date;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.util.Assert;
 
+import com.acc.enums.CSRStoreStatus;
 import com.acc.model.CSRCustomerDetailsModel;
 
 
@@ -39,6 +41,12 @@ public class MDIYCustomerToCSRCustomerPopulator implements Populator<CustomerMod
 		target.setLoginTime(new Date());
 		target.setCustomerId(source.getCustomerID());
 		target.setPointOfService("Chiba");
+		target.setStatus(CSRStoreStatus.LOGGEDIN);
+		if (CollectionUtils.isNotEmpty(source.getImageQuality()))
+		{
+			target.setImageUrl(source.getImageQuality().iterator().next().getImagePath());
+		}
+
 	}
 
 }
