@@ -40,23 +40,19 @@
 		 
 		 function getUserProfile() {
 		 
-			/*alert("In testApi.");*/ 
-			
 			FB.api(
-					  '/me',
+					  '/me/picture',
 					  'GET',
-					  {"fields":"picture{url},id,name"},
+					  {"type":"large"},
 					 	function(response) {
 						
-						  document.getElementById('status').innerHTML = 'Thanks for logging in, ' + response.name + '!'
-						  document.getElementById('url').innerHTML = 'The Picture url is , ' + response.picture.data.url
-						  $('#hiddenUrl').val(response.picture.data.url)
-						  sendImageURL()
-						  
+						  document.getElementById('url').innerHTML = 'The Picture url is , ' + response.data.url;
+						  $('#hiddenUrl').val(response.data.url);
+						  sendImageURL();
 					  }
 					);
 			
-			//myFacebookLogout();
+			myFacebookLogout();
 			    
 			}
 		 
@@ -66,5 +62,4 @@
 		        // Person is now logged out
 		    	});
 		 }
-		 
 		 
