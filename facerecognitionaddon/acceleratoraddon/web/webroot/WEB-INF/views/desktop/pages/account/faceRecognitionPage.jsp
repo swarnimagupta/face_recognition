@@ -1,24 +1,18 @@
+<%@ page import="com.acc.util.InstagramClient" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="template" tagdir="/WEB-INF/tags/desktop/template" %>
 <%@ taglib prefix="theme" tagdir="/WEB-INF/tags/shared/theme" %>
 <%@ taglib prefix="nav" tagdir="/WEB-INF/tags/desktop/nav" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="cms" uri="http://hybris.com/tld/cmstags" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags" %>
-<%@ taglib prefix="common" tagdir="/WEB-INF/tags/desktop/common" %>
-<%@ taglib prefix="breadcrumb" tagdir="/WEB-INF/tags/desktop/nav/breadcrumb" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-	<meta name="_csrf" content="${_csrf.token}"/>
-	<meta name="_csrf_header" content="${_csrf.headerName}"/>
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
 	<title>facerecognition page</title>
@@ -30,9 +24,11 @@
 <br>
 <br>
 <br>
+<center>
+	<div style="border:1px solid black; width:500px;padding:20px;">
 
-
-<b>Facerecognition Page</b>
+<h3>Facerecognition Page</h3>
+<br><br>
 <div class="container">
 	<div class="main">
        	<div class="customfile-container">
@@ -186,7 +182,91 @@
 		}( jQuery ));
 
 		$('input[type=file]').customFile();
+		
+		
+		function sendImageURL()
+		{
+			var url = $("#hiddenUrl").val();
+			getBase64FromImageUrl(url);
+		}
+		
+		function getBase64FromImageUrl(url) 
+		{
+			var xmlHTTP = new XMLHttpRequest();
+		    xmlHTTP.open('GET',url,true);
+		    xmlHTTP.responseType = 'arraybuffer';
+		    var dataURL= "";
+		    xmlHTTP.onload = function(e)
+		    {
+
+		        var arr = new Uint8Array(this.response);
+		        var raw = String.fromCharCode.apply(null,arr);
+		        var b64=btoa(raw);
+		        var dataURL="data:image/jpeg;base64,"+b64;
+		        alert("dataURL->"+dataURL);
+		        document.getElementById("image").src = dataURL;
+		        url = url.replace(/\./g,'DOT');
+		        url = url.replace(/\//g,'SLASH');
+		        $.ajax({
+					type : 'GET',
+					url : "${contextPath}/facerecognitionpage/submitImageURL",
+					data : "url="+url,
+					async : true,
+					dataType : "text",
+					crossDomain : true,
+					success : function(response) 
+					{
+						$("#message").html("Image Uploaded successfully!!");
+					},
+					error : function(e) {
+						$("#message").html("Please use a different image!!");
+					}
+				});
+		    };
+
+		    xmlHTTP.send();
+		}
 	</script>
+	<br>
+	<!-- facebook code starts -->	
+	<script type="text/javascript" src="${commonResourcePath}/../../_ui/addons/facerecognitionaddon/desktop/common/js/facebook_integration.js"></script>	
+	<fb:login-button scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button>
+	<div id="status"></div>
+	<div id="url"></div>
+	<br>
+	<% 
+		String code = request.getParameter("code"); 
+		String profilePic = null;	
+	
+		if(code == null){
+	%>
+		<a href="https://api.instagram.com/oauth/authorize/?client_id=e580d04d0687403189f86d49545b69a4&redirect_uri=http://electronics.local:9001${contextPath}/electronics/en/facerecognitionpage&response_type=code">Login</a> 
+ 	<%
+		} else {
+			
+			System.out.println("Code is "+code);
+			InstagramClient instagramClient = new InstagramClient();
+			profilePic = instagramClient.getProfilePicOfUser(code);
+			
+		%>User's Profile Pic is <%= profilePic %><%
+		}
+	%>
+	<c:set var="imageUrl" value="<%= profilePic %>"></c:set>
+	<input type="hidden" id="hiddenUrl" value="${imageUrl}"/>
+	<c:if test="${not empty imageUrl}">
+		<script type="text/javascript">
+			document.getElementById("hiddenUrl").value='${imageUrl}';
+			sendImageURL();
+		</script>
+	</c:if>
+	<img id="image" alt="data url loaded image" />
+	<!--  facebook code ends* -->
+	<div id="message"></div>
+	
+	<br><br>
+	<a href="http://electronics.local:9001${contextPath}">&lt;&lt;BACK</a>
+	</div>
+</center>
 </body>
 
 </html>

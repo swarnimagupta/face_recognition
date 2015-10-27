@@ -77,4 +77,11 @@ $.ajaxSetup({
 	</form>
  
 	<button value="Submit" onclick="uploadFormData()" >Upload</button>
+	
+	<!-- facebook code starts -->	
+	<script type="text/javascript" src="${commonResourcePath}/../../addons/facerecognitionaddon/desktop/common/js/facebook_integration.js"></script>	
+	<fb:login-button scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button>
+	<div id="status"></div>
+	<div id="url"></div>
+	<!--  facebook code ends* -->
 </div>

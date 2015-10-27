@@ -1,8 +1,14 @@
 $contentCatalog=electronicsContentCatalog
 $contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$defaultLanguage=en
 $contentCatalogName=Electronics Content Catalog
+$productCatalog=electronicsProductCatalog
+$productCatalogName=Electronics Product Catalog
+$productCV=catalogVersion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
 $page=page(uid, $contentCV)                        ;
 $contentPage=contentPage(uid, $contentCV)          ;
+$product=product(code, $productCV)
+$category=category(code, $productCV)
 
 
 ########### Component #############
@@ -21,3 +27,10 @@ insert_update ContentSlot;active[allownull=true];catalogVersion(catalog(id),vers
 
 insert_update ContentSlotForPage;catalogVersion(catalog(id),version)[unique=true,allownull=true];contentSlot(catalogVersion(catalog(id),version),uid)[allownull=true];page(catalogVersion(catalog(id),version),uid)[allownull=true];position[allownull=true];uid[unique=true,allownull=true]
 ;electronicsContentCatalog:Staged;electronicsContentCatalog:Staged:FaceRecognitionSlots;electronicsContentCatalog:Staged:profile;TopContent;FaceRecognitionCFP
+
+
+########### Component #############
+# CMS Link Component for Upload Image link on header
+#for desktop
+INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;&componentRef;target(code)[default='sameWindow'];$category;$product;linkName[lang=en];slots(uid,$contentCV)
+;;UploadImageLink;Upload Image Link;/facerecognitionpage;UploadImageLink;UploadImageLink;;;;Upload Image;HeaderLinksSlot
