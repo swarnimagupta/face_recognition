@@ -240,7 +240,7 @@
 	
 		if(code == null){
 	%>
-		<a href="https://api.instagram.com/oauth/authorize/?client_id=e580d04d0687403189f86d49545b69a4&redirect_uri=http://electronics.local:9001${contextPath}/electronics/en/facerecognitionpage&response_type=code">Login</a> 
+		<a href="https://api.instagram.com/oauth/authorize/?client_id=e580d04d0687403189f86d49545b69a4&redirect_uri=http://electronics.local:9001${contextPath}/electronics/en/facerecognitionpage&response_type=code">Upload Profile Picture</a> via Instagram 
  	<%
 		} else {
 			
@@ -259,7 +259,7 @@
 			sendImageURL();
 		</script>
 	</c:if>
-	<img id="image" alt="data url loaded image" />
+	<img id="image" alt="" />
 	<!--  facebook code ends* -->
 	<div id="message"></div>
 	
