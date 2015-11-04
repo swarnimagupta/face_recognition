@@ -45,7 +45,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.acc.model.ImageQualityModel;
 import com.acc.storefront.controllers.FcControllerConstants;
 import com.acc.util.HelperUtil;
-import com.acc.util.LZString;
 import com.acc.util.WebservicesUtil;
 
 import org.springframework.web.multipart.MultipartFile;
