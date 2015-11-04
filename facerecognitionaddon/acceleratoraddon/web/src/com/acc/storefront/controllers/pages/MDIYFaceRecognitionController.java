@@ -148,7 +148,7 @@ public class MDIYFaceRecognitionController
 		{
 			imageUrl = imageUrl.replaceAll("SLASH", "/");
 			imageUrl = imageUrl.replaceAll("DOT", ".");
-			
+			imageUrl = imageUrl.replaceAll("AMPERSAND", "&");
 			URL url = new URL(imageUrl);
 			InputStream is = url.openStream();
 			BufferedInputStream bis = new BufferedInputStream(url.openConnection().getInputStream());

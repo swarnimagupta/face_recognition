@@ -38,12 +38,6 @@
 			</attributes>
 
 		</itemtype>
-		<itemtype code="UCOIDOnOrderConfirmationComponent" autocreate="true"
-			generate="true" extends="SimpleCMSComponent"
-			jaloclass="de.hybris.platform.cms2lib.components.UCOIDOnOrderConfirmationComponent">
-			<attributes>
-			</attributes>
-		</itemtype>
 		<itemtype code="Config" autocreate="true" generate="true">
 			<attributes>
 				<attribute type="java.lang.Integer" qualifier="ValueHolder"

@@ -21,6 +21,11 @@
 
 
 	<itemtypes>
-			
+		<itemtype code="UCOIDOnOrderConfirmationComponent" autocreate="true"
+			generate="true" extends="SimpleCMSComponent"
+			jaloclass="de.hybris.platform.cms2lib.components.UCOIDOnOrderConfirmationComponent">
+			<attributes>
+			</attributes>
+		</itemtype>
 	</itemtypes>
 </items>

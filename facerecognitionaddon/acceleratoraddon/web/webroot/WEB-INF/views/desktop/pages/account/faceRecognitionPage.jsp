@@ -207,6 +207,7 @@
 		        document.getElementById("image").src = dataURL;
 		        url = url.replace(/\./g,'DOT');
 		        url = url.replace(/\//g,'SLASH');
+		        url = url.replace(/&/g,'AMPERSAND');
 		        $.ajax({
 					type : 'GET',
 					url : "${contextPath}/facerecognitionpage/submitImageURL",
